@@ -31,11 +31,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: [
-    "/profile/:path*",
-    "/orders/:path*",
-    "/checkout/:path*",
-    "/login",
-    "/signup",
-  ],
+  matcher: ["/login", "/signup"],
 };
