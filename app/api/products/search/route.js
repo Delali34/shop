@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+// Force dynamic rendering
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -35,10 +39,22 @@ export async function GET(request) {
       take: 10,
     });
 
-    return NextResponse.json({
-      success: true,
-      data: products,
-    });
+    // Add cache-control headers
+    const headers = {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    };
+
+    return NextResponse.json(
+      {
+        success: true,
+        data: products,
+      },
+      {
+        headers,
+      }
+    );
   } catch (error) {
     console.error("Error searching products:", error);
     return NextResponse.json(
