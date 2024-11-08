@@ -478,7 +478,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gray-100">
       <div className="flex h-screen">
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow-lg">
+        <div className="w-56 bg-white shadow-lg">
           <div className="p-4">
             <h1 className="text-2xl font-bold text-indigo-800">Admin Panel</h1>
           </div>

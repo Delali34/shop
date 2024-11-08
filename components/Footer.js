@@ -19,8 +19,8 @@ export default function Footer() {
             <ul>
               <li className="mb-2">3881 Heron Way, Oregon</li>
               <li className="mb-2">United States - 97205</li>
-              <li className="mb-2">Phone: (+123)972-883-4780</li>
-              <li className="mb-2">Email: support@opulence.com</li>
+              <li className="mb-2">Phone: +233595008581 / +1 (914) 267-7187</li>
+              <li className="mb-2">Email: Opulenceties@gmail.com</li>
             </ul>
           </div>
 

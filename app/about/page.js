@@ -4,6 +4,7 @@ import Image from "@/components/Image";
 import Services from "@/components/Service";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import Clients from "@/components/Clients";
 
 const NecktieShape = ({ className, color }) => (
   <svg
@@ -57,9 +58,9 @@ const MessageComponent = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           A premium necktie manufacturing business, catering to
-          fashion-conscious professionals and businesses. Our expertise lies in
-          crafting custom-made neckties and complementary accessories, tailored
-          to our clients' unique needs and preferences.
+          fashion-conscious professionals and businesses. . Our expertise lies
+          in crafting custom-made neckties and complementary accessories,
+          catering to our clients.
         </motion.p>
         <motion.div
           className="inline-block"
@@ -75,6 +76,7 @@ const MessageComponent = () => {
 
       <Image />
       <Services />
+      <Clients />
     </section>
   );
 };

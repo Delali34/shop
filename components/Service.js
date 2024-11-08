@@ -48,14 +48,15 @@ const Services = () => {
               variants={itemVariants}
               className="mb-8 text-gray-700 text-lg leading-relaxed"
             >
-              Beyond delivering top-notch neckties, we provide professional
-              styling services that significantly enhance our clients' image.
+              Beyond delivering top-notch neckties and scarves, we provide
+              Professional styling services that enhances the image of clients
+              significantly.
             </motion.p>
             <motion.ul variants={itemVariants} className="space-y-6">
               {[
-                "Provide corporate fashion advice that best reflects client budget, lifestyle, body shape, and coloring.",
-                "Assist clients with wardrobe organization and updates, shopping guidance, and personal color analysis.",
-                "Offer comprehensive personal image consulting.",
+                "Provide corporate fashion advice that best reflect client budget, lifestyle, body shape and coloring.",
+                "Assist client with wardrobe organization and update, shopping guidance, and personal color analysis. ",
+                "Provide personal image consulting.",
               ].map((item, index) => (
                 <motion.li
                   key={index}
@@ -92,7 +93,7 @@ const Services = () => {
           >
             <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/image2.jpg"
+                src="/opulence (1).jpeg"
                 alt="Professional styling"
                 layout="fill"
                 objectFit="cover"

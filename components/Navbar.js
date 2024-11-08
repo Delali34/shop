@@ -91,7 +91,7 @@ export default function Navbar() {
               <Link href="/about" className="text-white hover:text-gold">
                 About Us
               </Link>
-              <Link href="/products" className="text-white hover:text-gold">
+              <Link href="/product" className="text-white hover:text-gold">
                 Products
               </Link>
               <Link href="/contact" className="text-white hover:text-gold">
@@ -156,7 +156,7 @@ export default function Navbar() {
                         </Link>
 
                         <Link
-                          href="/orders"
+                          href="/profile"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           onClick={() => setIsProfileMenuOpen(false)}
                         >
@@ -234,7 +234,7 @@ export default function Navbar() {
               About us
             </Link>
             <Link
-              href="/products"
+              href="/product"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
             >
               Products
@@ -254,7 +254,7 @@ export default function Navbar() {
                   Profile
                 </Link>
                 <Link
-                  href="/orders"
+                  href="/profile"
                   className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
                 >
                   Order History

@@ -27,7 +27,7 @@ const ImageGallery = () => {
           <Image
             width={1000}
             height={800}
-            src="/image1.jpg"
+            src="/opulence (2).jpeg"
             alt="Woman in teal jacket"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -44,7 +44,7 @@ const ImageGallery = () => {
           <Image
             width={500}
             height={300}
-            src="/image2.jpg"
+            src="/opulence (3).jpeg"
             alt="Man in workshop"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -61,7 +61,7 @@ const ImageGallery = () => {
           <Image
             width={500}
             height={250}
-            src="/image3.jpg"
+            src="/opulence (4).jpeg"
             alt="Sewing machine close-up"
             className="w-full h-full object-cover rounded-lg"
           />

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   const images = ["/image (1).jpeg", "/image (2).jpeg", "/image (3).jpeg"];
@@ -83,23 +84,25 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md flex items-center space-x-2 text-lg lg:text-base">
-            <svg
-              className="w-6 h-6 lg:w-5 lg:h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4L4.3 5H2m7 9v9a1 1 0 001 1h4a1 1 0 001-1v-9m-6 0h6"
-              ></path>
-            </svg>
-            <span>Shop Now</span>
-          </button>
+          <Link href="/categories">
+            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-md flex items-center space-x-2 text-lg lg:text-base">
+              <svg
+                className="w-6 h-6 lg:w-5 lg:h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4L4.3 5H2m7 9v9a1 1 0 001 1h4a1 1 0 001-1v-9m-6 0h6"
+                ></path>
+              </svg>
+              <span>Shop Now</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
