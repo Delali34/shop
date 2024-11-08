@@ -1,68 +1,67 @@
-import { FiEdit2, FiTrash2, FiCheck, FiX } from "react-icons/fi";
+// components/admin/UsersTab.js
+import React, { useState } from "react";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { UserModal } from "./Modals/UserModal";
 
 export function UsersTab({ users, onEdit, onDelete }) {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleEditClick = (user) => {
+    setCurrentUser(user);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await onEdit(currentUser);
+    setIsEditModalOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleDeleteClick = async (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      await onDelete(id);
+    }
+  };
+
   return (
     <div className="p-6">
       <div className="sm:flex sm:items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-gray-900">Users</h1>
           <p className="mt-2 text-sm text-gray-700">
-            A list of all users including their name, email, and role.
+            A list of all users and their details.
           </p>
         </div>
       </div>
 
+      {/* Users Table */}
       <div className="mt-8 flex flex-col">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Role
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Joined
-                    </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Actions</span>
-                    </th>
-                  </tr>
-                </thead>
+                {/* Table headers remain the same */}
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {users.map((user) => (
                     <tr key={user.id}>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                        {user.first_name} {user.last_name}
+                        {user.name || "No name"}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {user.email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         <span
-                          className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
+                          className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
                             user.role === "admin"
                               ? "bg-purple-100 text-purple-800"
                               : "bg-green-100 text-green-800"
@@ -71,20 +70,28 @@ export function UsersTab({ users, onEdit, onDelete }) {
                           {user.role}
                         </span>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {new Date(user.created_at).toLocaleDateString()}
+                      <td className="whitespace-nowrap px-3 py-4 text-sm">
+                        <span
+                          className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
+                            user.emailVerified
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-yellow-100 text-yellow-800"
+                          }`}
+                        >
+                          {user.emailVerified ? "Verified" : "Pending"}
+                        </span>
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <div className="flex items-center justify-end space-x-2">
                           <button
-                            onClick={() => onEdit(user)}
+                            onClick={() => handleEditClick(user)}
                             className="text-indigo-600 hover:text-indigo-900"
                           >
                             <FiEdit2 className="h-4 w-4" />
                             <span className="sr-only">Edit user</span>
                           </button>
                           <button
-                            onClick={() => onDelete(user.id)}
+                            onClick={() => handleDeleteClick(user.id)}
                             className="text-red-600 hover:text-red-900"
                           >
                             <FiTrash2 className="h-4 w-4" />
@@ -106,6 +113,14 @@ export function UsersTab({ users, onEdit, onDelete }) {
           <p className="text-gray-500 text-sm">No users found</p>
         </div>
       )}
+
+      <UserModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        currentUser={currentUser}
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+      />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { ProductModal } from "@/components/admin/Modals/ProductModal";
 import { CategoryModal } from "@/components/admin/Modals/CategoryModal";
 import { UserModal } from "@/components/admin/Modals/UserModal";
 import { StatsPanel } from "@/components/admin/StatsPanel";
+import { OrdersTab } from "@/components/admin/OrdersTab";
 
 export default function AdminDashboard() {
   // State management
@@ -110,56 +111,79 @@ export default function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("authToken");
-      if (!token) return;
-
-      const response = await fetch("/api/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
-        );
-      }
-
+      const response = await fetch("/api/users");
       const data = await response.json();
+
       if (data.success) {
-        setUsers(data.data.filter((user) => user.role === "user")); // Only show users, not admins
+        setUsers(data.data);
       }
     } catch (error) {
       console.error("Failed to fetch users:", error);
       setUsers([]);
     }
   };
+  // In your AdminDashboard component
+  const handleEditUser = async (updatedUser) => {
+    try {
+      const response = await fetch(`/api/users/${updatedUser.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update user");
+      }
+
+      await fetchUsers(); // Refresh the users list
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      const response = await fetch(`/api/users/${userId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
+      }
+
+      await fetchUsers(); // Refresh the users list
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem("authToken");
-      if (!token) return;
+      const response = await fetch("/api/orders");
+      const data = await response.json();
 
-      const res = await fetch("/api/orders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-
-      const data = await res.json();
       if (data.success) {
-        setOrders(data.data || []);
+        setOrders(data.data);
+      } else {
+        throw new Error(data.error || "Failed to fetch orders");
       }
     } catch (error) {
       console.error("Failed to fetch orders:", error);
       setOrders([]);
+    }
+  };
+
+  // Add this function to handle order updates
+  const handleUpdateOrder = async (updatedOrder) => {
+    try {
+      const updatedOrders = orders.map((order) =>
+        order.id === updatedOrder.id ? updatedOrder : order
+      );
+      setOrders(updatedOrders);
+    } catch (error) {
+      console.error("Error updating order in state:", error);
     }
   };
 
@@ -359,21 +383,6 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDeleteUser = async (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      try {
-        const response = await fetch(`/api/users/${id}`, {
-          method: "DELETE",
-        });
-        if (response.ok) {
-          await fetchUsers();
-        }
-      } catch (error) {
-        console.error("Error deleting user:", error);
-      }
-    }
-  };
-
   // Navigation items
   const navItems = [
     { id: "products", icon: FaBox, label: "Products" },
@@ -445,12 +454,7 @@ export default function AdminDashboard() {
           />
         );
       case "orders":
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800">Orders</h2>
-            {/* Implement OrdersTab component */}
-          </div>
-        );
+        return <OrdersTab orders={orders} onUpdateOrder={handleUpdateOrder} />;
       case "payments":
         return (
           <div className="p-6">

@@ -13,6 +13,7 @@ export default function CheckoutPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [sameAsBilling, setSameAsBilling] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     shippingStreetAddress: "",
     shippingApartment: "",
@@ -31,6 +32,39 @@ export default function CheckoutPage() {
   });
   const [errors, setErrors] = useState({});
 
+  const validateForm = () => {
+    const newErrors = {};
+    const requiredFields = [
+      "shippingStreetAddress",
+      "shippingCity",
+      "shippingState",
+      "shippingPostalCode",
+      "shippingCountry",
+      "shippingPhone",
+    ];
+
+    if (!sameAsBilling) {
+      requiredFields.push(
+        "billingStreetAddress",
+        "billingCity",
+        "billingState",
+        "billingPostalCode",
+        "billingCountry",
+        "billingPhone"
+      );
+    }
+
+    requiredFields.forEach((field) => {
+      if (!formData[field].trim()) {
+        newErrors[field] = "This field is required";
+      }
+    });
+
+    setErrors(newErrors);
+    setIsFormValid(Object.keys(newErrors).length === 0);
+    return Object.keys(newErrors).length === 0;
+  };
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -38,6 +72,11 @@ export default function CheckoutPage() {
   const subtotal = getSubtotal();
   const shippingCost = 20.0;
   const totalAmount = subtotal + shippingCost;
+
+  // Validate form whenever formData or sameAsBilling changes
+  useEffect(() => {
+    validateForm();
+  }, [formData, sameAsBilling]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isClient) {
@@ -69,38 +108,6 @@ export default function CheckoutPage() {
         [billingField]: value,
       }));
     }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    const requiredFields = [
-      "shippingStreetAddress",
-      "shippingCity",
-      "shippingState",
-      "shippingPostalCode",
-      "shippingCountry",
-      "shippingPhone",
-    ];
-
-    if (!sameAsBilling) {
-      requiredFields.push(
-        "billingStreetAddress",
-        "billingCity",
-        "billingState",
-        "billingPostalCode",
-        "billingCountry",
-        "billingPhone"
-      );
-    }
-
-    requiredFields.forEach((field) => {
-      if (!formData[field]) {
-        newErrors[field] = "This field is required";
-      }
-    });
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   const handlePaystackSuccess = async (response) => {
@@ -197,6 +204,7 @@ export default function CheckoutPage() {
                 <div>
                   <input
                     name="shippingStreetAddress"
+                    required
                     value={formData.shippingStreetAddress}
                     onChange={handleInputChange}
                     placeholder="Street Address *"
@@ -473,11 +481,17 @@ export default function CheckoutPage() {
             <div className="mt-6">
               <PaystackButton
                 {...config}
-                text="Pay Now"
+                text={
+                  isFormValid ? "Pay Now" : "Please Fill All Required Fields"
+                }
                 onSuccess={handlePaystackSuccess}
                 onClose={() => console.log("Payment canceled")}
-                className="w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition-colors disabled:opacity-50"
-                disabled={isLoading}
+                className={`w-full py-3 rounded transition-colors ${
+                  isFormValid
+                    ? "bg-black text-white hover:bg-gray-800"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!isFormValid || isLoading}
               />
             </div>
           </div>
