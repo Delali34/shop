@@ -20,7 +20,7 @@ export default function Footer() {
               <li className="mb-2 font-bold">Ghana</li>
               <li className="mb-2">15 Baussino Street Lashibi Community 18.</li>
 
-              <li className="mb-2">Phone: +233241448340 / 0595008581</li>
+              <li className="mb-2">Phone: +233241448340 / +233595008581</li>
             </ul>
             <ul>
               <li className="font-bold">USA</li>
