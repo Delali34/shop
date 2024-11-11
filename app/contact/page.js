@@ -50,6 +50,7 @@ export default function Contact() {
                 <a
                   href="https://instagram.com/opulence_ties"
                   className="text-gray-700 hover:text-black transition-colors"
+                  target="_blank"
                 >
                   @opulence_ties
                 </a>

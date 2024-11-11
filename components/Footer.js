@@ -25,8 +25,7 @@ export default function Footer() {
             <ul>
               <li className="font-bold">USA</li>
               <li className="mb-2">
-                1 remsen road road apt 4k Yonkers 10710 NY Yonkers , <br /> NY
-                10710
+                1 remsen road apt 4k Yonkers 10710 NY Yonkers, NY 10710
               </li>
 
               <li className="mb-2">Phone: +1 (914) 267-7187</li>
@@ -39,13 +38,13 @@ export default function Footer() {
             <h5 className="text-lg font-semibold mb-4">Outfits</h5>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <a href="/categories" className="hover:underline">
                   Top Collection
                 </a>
               </li>
 
               <li className="mb-2">
-                <a href="#" className="hover:underline">
+                <a href="/categories" className="hover:underline">
                   Featured Collection
                 </a>
               </li>
@@ -74,7 +73,11 @@ export default function Footer() {
         <div className="mt-10 text-center text-gray-400">
           <p>© 2024 Opulence</p>
           <div className="mt-4 flex justify-center space-x-4">
-            <a href="#" className="hover:text-white">
+            <a
+              href="https://instagram.com/opulence_ties"
+              className="hover:text-white"
+              target="_blank"
+            >
               <FaInstagram />
             </a>
             <a href="#" className="hover:text-white">

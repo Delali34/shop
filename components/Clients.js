@@ -79,11 +79,6 @@ export default function Clients() {
           </div>
 
           {/* Animated Dots */}
-          <div className="flex justify-center space-x-4 mt-12">
-            <div className="w-3 h-3 bg-gray-400 rounded-full animate-bounce"></div>
-            <div className="w-3 h-3 bg-gray-600 rounded-full animate-bounce delay-100"></div>
-            <div className="w-3 h-3 bg-gray-800 rounded-full animate-bounce delay-200"></div>
-          </div>
         </div>
       </div>
     </div>
