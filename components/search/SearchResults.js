@@ -25,9 +25,9 @@ const SearchResults = ({ searchResults, loading, onClose }) => (
             className="group block"
           >
             <div className="aspect-[3/4] bg-white mb-4 overflow-hidden shadow-md">
-              {product.image_url ? (
+              {product.imageUrl ? (
                 <Image
-                  src={product.image_url}
+                  src={product.imageUrl}
                   alt={product.name}
                   width={300}
                   height={400}
@@ -46,11 +46,11 @@ const SearchResults = ({ searchResults, loading, onClose }) => (
               <div className="flex items-center justify-center gap-3 text-sm">
                 {product.original_price && (
                   <span className="text-gray-400 line-through">
-                    ${parseFloat(product.original_price).toFixed(2)}
+                    GH₵{parseFloat(product.original_price).toFixed(2)}
                   </span>
                 )}
                 <span className="text-red-500">
-                  ${parseFloat(product.price).toFixed(2)}
+                  GH₵{parseFloat(product.price).toFixed(2)}
                 </span>
               </div>
             </div>

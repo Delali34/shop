@@ -12,7 +12,7 @@ export async function GET() {
         },
       },
       orderBy: {
-        name: "asc",
+        createdAt: "asc", // Changed from name to createdAt
       },
     });
 
@@ -60,6 +60,7 @@ export async function POST(request) {
         description,
         slug,
         imageUrl: image_url,
+        createdAt: new Date(), // Explicitly set creation time
       },
     });
 

@@ -38,7 +38,7 @@ export default function AdminDashboard() {
     brand: "",
     price: "",
     description: "",
-    rating: "",
+
     category_id: "",
     stock_quantity: "",
   });
@@ -231,15 +231,14 @@ export default function AdminDashboard() {
       const productData = {
         ...currentProduct,
         price: parseFloat(currentProduct.price) || 0,
-        rating: parseFloat(currentProduct.rating) || 0,
         stock_quantity: parseInt(currentProduct.stock_quantity) || 0,
         image_url,
       };
 
-      const url = currentProduct.id
-        ? `/api/products/${currentProduct.id}`
-        : "/api/products";
       const method = currentProduct.id ? "PUT" : "POST";
+      const url = currentProduct.id
+        ? `/api/products` // For both create and update, use the same endpoint
+        : `/api/products`;
 
       const response = await fetch(url, {
         method,
@@ -248,21 +247,35 @@ export default function AdminDashboard() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save product");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to save product");
       }
 
+      const data = await response.json();
+
+      // Update local state
+      if (currentProduct.id) {
+        setProducts(
+          products.map((p) => (p.id === data.data.id ? data.data : p))
+        );
+      } else {
+        setProducts([data.data, ...products]);
+      }
+
+      // Reset form and close modal
       setIsProductModalOpen(false);
       setCurrentProduct({
         name: "",
         brand: "",
         price: "",
         description: "",
-        rating: "",
         category_id: "",
         stock_quantity: "",
       });
       setImage(null);
-      await fetchProducts();
+
+      // Show success message
+      alert(data.message || "Product saved successfully");
     } catch (error) {
       console.error("Error saving product:", error);
       alert(error.message);
@@ -270,19 +283,36 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteProduct = async (id) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this product? This will also remove it from all orders."
+      )
+    ) {
       try {
         const response = await fetch(`/api/products/${id}`, {
           method: "DELETE",
         });
-        if (response.ok) {
-          await fetchProducts();
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || "Failed to delete product");
         }
+
+        // Update local state
+        setProducts(products.filter((product) => product.id !== id));
+        alert("Product deleted successfully");
       } catch (error) {
         console.error("Error deleting product:", error);
+        alert(error.message);
       }
     }
   };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Add feedback messages
+  const [feedback, setFeedback] = useState({ type: "", message: "" });
 
   // Category handlers
   const handleCategoryInputChange = (e) => {
@@ -476,6 +506,15 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {feedback.message && (
+        <div
+          className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg ${
+            feedback.type === "success" ? "bg-green-500" : "bg-red-500"
+          } text-white`}
+        >
+          {feedback.message}
+        </div>
+      )}
       <div className="flex h-screen">
         {/* Sidebar */}
         <div className="w-56 bg-white shadow-lg">
@@ -509,6 +548,7 @@ export default function AdminDashboard() {
               handleSubmit={handleProductSubmit}
               handleImageChange={handleImageChange}
               categories={categories}
+              isSubmitting={isSubmitting}
             />
 
             <CategoryModal

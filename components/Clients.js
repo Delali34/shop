@@ -16,7 +16,11 @@ export default function Clients() {
           <h1 className="text-4xl md:text-6xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
             Our Clients
           </h1>
-
+          <p className="text-center">
+            We deliver tailored solutions to clients spanning various industries
+            and sectors. Our clientele comprises individuals, businesses, and
+            organizations.
+          </p>
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             {/* Individuals Section */}
             <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors duration-300">

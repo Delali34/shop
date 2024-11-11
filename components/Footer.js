@@ -17,10 +17,20 @@ export default function Footer() {
           <div>
             <h5 className="text-lg font-semibold mb-4">Our Store</h5>
             <ul>
-              <li className="mb-2">3881 Heron Way, Oregon</li>
-              <li className="mb-2">United States - 97205</li>
-              <li className="mb-2">Phone: +233595008581 / +1 (914) 267-7187</li>
-              <li className="mb-2">Email: Opulenceties@gmail.com</li>
+              <li className="mb-2 font-bold">Ghana</li>
+              <li className="mb-2">15 Baussino Street Lashibi Community 18.</li>
+
+              <li className="mb-2">Phone: +233241448340 / 0595008581</li>
+            </ul>
+            <ul>
+              <li className="font-bold">USA</li>
+              <li className="mb-2">
+                1 remsen road road apt 4k Yonkers 10710 NY Yonkers , <br /> NY
+                10710
+              </li>
+
+              <li className="mb-2">Phone: +1 (914) 267-7187</li>
+              <li className="mb-2">Email: Support@opulenceties.com</li>
             </ul>
           </div>
 
@@ -33,16 +43,7 @@ export default function Footer() {
                   Top Collection
                 </a>
               </li>
-              <li className="mb-2">
-                <a href="#" className="hover:underline">
-                  Best Seller
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="hover:underline">
-                  Outfits Of The Day
-                </a>
-              </li>
+
               <li className="mb-2">
                 <a href="#" className="hover:underline">
                   Featured Collection
@@ -57,22 +58,12 @@ export default function Footer() {
             <ul>
               <li className="mb-2">
                 <a href="#" className="hover:underline">
-                  Claim
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="hover:underline">
                   Privacy
                 </a>
               </li>
               <li className="mb-2">
                 <a href="#" className="hover:underline">
                   Terms
-                </a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="hover:underline">
-                  Support
                 </a>
               </li>
             </ul>
@@ -84,17 +75,12 @@ export default function Footer() {
           <p>© 2024 Opulence</p>
           <div className="mt-4 flex justify-center space-x-4">
             <a href="#" className="hover:text-white">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="hover:text-white">
               <FaInstagram />
             </a>
             <a href="#" className="hover:text-white">
               <FaTwitter />
             </a>
-            <a href="#" className="hover:text-white">
-              <FaYoutube />
-            </a>
+
             <a href="#" className="hover:text-white">
               <FaWhatsapp />
             </a>

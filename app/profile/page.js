@@ -1,17 +1,17 @@
-// app/profile/page.js
 "use client";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiUser, FiShoppingBag, FiMapPin, FiEdit } from "react-icons/fi";
+import { FiUser, FiShoppingBag, FiMapPin, FiEdit, FiBox } from "react-icons/fi";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState("profile");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   if (!session) {
-    return null; // Protected by middleware
+    return null;
   }
 
   const TABS = [
@@ -32,7 +32,7 @@ export default function ProfilePage() {
       case "profile":
         return (
           <div className="space-y-6">
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
               {session.user.image ? (
                 <Image
                   src={session.user.image}
@@ -42,11 +42,11 @@ export default function ProfilePage() {
                   className="rounded-full"
                 />
               ) : (
-                <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
+                <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center shrink-0">
                   <FiUser className="w-8 h-8 text-gray-400" />
                 </div>
               )}
-              <div>
+              <div className="text-center sm:text-left">
                 <h2 className="text-xl font-semibold">
                   {session.user.name || "No name set"}
                 </h2>
@@ -54,30 +54,40 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-medium mb-4">Account Details</h3>
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium">Account Details</h3>
+                {/* <button className="text-indigo-600 hover:text-indigo-700 flex items-center gap-1 text-sm">
+                  <FiEdit className="w-4 h-4" />
+                  <span className="hidden sm:inline">Edit Profile</span>
+                </button> */}
+              </div>
               <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Name
-                  </label>
-                  <p className="mt-1 text-gray-900">{session.user.name}</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <p className="mt-1 text-gray-900">{session.user.email}</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Account Created
-                  </label>
-                  <p className="mt-1 text-gray-900">
-                    {new Date(
-                      session.user.createdAt || Date.now()
-                    ).toLocaleDateString()}
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-3 rounded">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Name
+                    </label>
+                    <p className="mt-1 text-gray-900">{session.user.name}</p>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Email
+                    </label>
+                    <p className="mt-1 text-gray-900 break-all">
+                      {session.user.email}
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Account Created
+                    </label>
+                    <p className="mt-1 text-gray-900">
+                      {new Date(
+                        session.user.createdAt || Date.now()
+                      ).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,28 +97,40 @@ export default function ProfilePage() {
       case "orders":
         return <OrderHistory />;
 
-      case "addresses":
-        return <AddressBook />;
-
       default:
         return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile Tab Selection */}
+        <div className="block sm:hidden mb-6">
+          <select
+            value={activeTab}
+            onChange={(e) => setActiveTab(e.target.value)}
+            className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          >
+            {TABS.map((tab) => (
+              <option key={tab.id} value={tab.id}>
+                {tab.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Sidebar */}
-          <div className="md:col-span-1">
-            <nav className="space-y-1">
+          {/* Sidebar - Hidden on mobile */}
+          <div className="hidden md:block md:col-span-1">
+            <nav className="space-y-1 sticky top-6">
               {TABS.map((tab) => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`w-full flex items-center px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
                       activeTab === tab.id
                         ? "bg-indigo-50 text-indigo-600"
                         : "text-gray-600 hover:bg-gray-50"
@@ -131,7 +153,7 @@ export default function ProfilePage() {
           {/* Main Content */}
           <div className="md:col-span-3">
             <div className="bg-white shadow rounded-lg">
-              <div className="p-6">{renderTabContent()}</div>
+              <div className="p-4 sm:p-6">{renderTabContent()}</div>
             </div>
           </div>
         </div>
@@ -182,7 +204,7 @@ function OrderHistory() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
       </div>
     );
   }
@@ -190,7 +212,9 @@ function OrderHistory() {
   if (error) {
     return (
       <div className="text-center py-8">
-        <p className="text-red-500">{error}</p>
+        <div className="bg-red-50 p-4 rounded-md">
+          <p className="text-red-600">{error}</p>
+        </div>
       </div>
     );
   }
@@ -198,18 +222,19 @@ function OrderHistory() {
   if (orders.length === 0) {
     return (
       <div className="text-center py-8">
-        <FiShoppingBag className="mx-auto h-12 w-12 text-gray-400" />
-        <h3 className="mt-2 text-sm font-medium text-gray-900">
+        <FiBox className="mx-auto h-12 w-12 text-gray-400" />
+        <h3 className="mt-4 text-lg font-medium text-gray-900">
           No orders yet
         </h3>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-2 text-gray-500">
           Start shopping to see your orders here.
         </p>
         <div className="mt-6">
           <Link
-            href="/"
-            className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+            href="/shop"
+            className="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
           >
+            <FiShoppingBag className="mr-2 -ml-1" />
             Browse Products
           </Link>
         </div>
@@ -236,36 +261,41 @@ function OrderHistory() {
 
   return (
     <div className="space-y-6">
-      <h3 className="text-lg font-medium">Order History</h3>
-      <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-medium">Order History</h3>
+        <span className="text-sm text-gray-500">{orders.length} orders</span>
+      </div>
+
+      <div className="space-y-4">
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-white border rounded-lg overflow-hidden"
+            className="bg-white border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-200"
           >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
+            {/* Order Header */}
+            <div className="p-4 sm:p-6 border-b bg-gray-50">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <p className="text-sm font-medium text-gray-900">
                     Order #{order.id}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-500 mt-1">
                     Placed on {new Date(order.createdAt).toLocaleDateString()}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Reference: {order.paymentReference}
+                  <p className="text-xs text-gray-500 mt-1">
+                    Ref: {order.paymentReference}
                   </p>
                 </div>
-                <div className="flex flex-col items-end gap-2">
+                <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2">
                   <span
-                    className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(
+                    className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusColor(
                       order.status
                     )}`}
                   >
                     {order.status}
                   </span>
                   <span
-                    className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(
+                    className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusColor(
                       order.paymentStatus
                     )}`}
                   >
@@ -273,65 +303,75 @@ function OrderHistory() {
                   </span>
                 </div>
               </div>
+            </div>
 
+            {/* Order Items */}
+            <div className="p-4 sm:p-6">
               <div className="space-y-4">
                 {order.orderItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-16 h-16">
-                      <Image
-                        src={item.product.imageUrl || "/placeholder.png"}
-                        alt={item.product.name}
-                        width={64}
-                        height={64}
-                        className="rounded object-cover"
-                      />
+                  <div
+                    key={item.id}
+                    className="flex flex-col sm:flex-row gap-4"
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-full sm:w-20 h-20 relative rounded overflow-hidden bg-gray-100">
+                        <Image
+                          src={item.product.imageUrl || "/placeholder.png"}
+                          alt={item.product.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-gray-900">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-medium text-gray-900 truncate">
                         {item.product.name}
                       </h4>
-                      <p className="text-sm text-gray-500">
+                      <p className="mt-1 text-sm text-gray-500">
                         Quantity: {item.quantity}
                       </p>
-                    </div>
-                    <div className="text-sm font-medium text-gray-900">
-                      GH₵{(item.priceAtTime * item.quantity).toFixed(2)}
+                      <p className="mt-1 text-sm font-medium text-gray-900">
+                        GH₵{(item.priceAtTime * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 border-t pt-4 space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Subtotal</span>
-                  <span className="text-sm font-medium">
-                    GH₵{order.subtotal.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Shipping</span>
-                  <span className="text-sm font-medium">
-                    GH₵{order.shippingCost.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm font-medium text-gray-900">
-                    Total
-                  </span>
-                  <span className="text-sm font-medium text-gray-900">
-                    GH₵{order.totalAmount.toFixed(2)}
-                  </span>
+              {/* Order Summary */}
+              <div className="mt-6 border-t pt-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Subtotal</span>
+                    <span className="font-medium">
+                      GH₵{order.subtotal.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Shipping</span>
+                    <span className="font-medium">
+                      GH₵{order.shippingCost.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm font-medium pt-2 border-t">
+                    <span className="text-gray-900">Total</span>
+                    <span className="text-gray-900">
+                      GH₵{order.totalAmount.toFixed(2)}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Shipping Address */}
+              {/* Addresses */}
               <div className="mt-6 border-t pt-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Shipping Address */}
                   <div>
-                    <h4 className="text-sm font-medium text-gray-900 mb-2">
+                    <h4 className="text-sm font-medium text-gray-900 mb-2 flex items-center">
+                      <FiMapPin className="mr-2" />
                       Shipping Address
                     </h4>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 space-y-1">
                       <p>{order.shippingAddress.streetAddress}</p>
                       {order.shippingAddress.apartment && (
                         <p>{order.shippingAddress.apartment}</p>
@@ -342,14 +382,19 @@ function OrderHistory() {
                         {order.shippingAddress.postalCode}
                       </p>
                       <p>{order.shippingAddress.country}</p>
-                      <p>Phone: {order.shippingAddress.phone}</p>
+                      <p className="font-medium">
+                        Phone: {order.shippingAddress.phone}
+                      </p>
                     </div>
                   </div>
+
+                  {/* Billing Address */}
                   <div>
-                    <h4 className="text-sm font-medium text-gray-900 mb-2">
+                    <h4 className="text-sm font-medium text-gray-900 mb-2 flex items-center">
+                      <FiMapPin className="mr-2" />
                       Billing Address
                     </h4>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 space-y-1">
                       <p>{order.billingAddress.streetAddress}</p>
                       {order.billingAddress.apartment && (
                         <p>{order.billingAddress.apartment}</p>
@@ -360,7 +405,9 @@ function OrderHistory() {
                         {order.billingAddress.postalCode}
                       </p>
                       <p>{order.billingAddress.country}</p>
-                      <p>Phone: {order.billingAddress.phone}</p>
+                      <p className="font-medium">
+                        Phone: {order.billingAddress.phone}
+                      </p>
                     </div>
                   </div>
                 </div>

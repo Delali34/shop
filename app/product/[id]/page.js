@@ -60,14 +60,6 @@ const RelatedProductCard = ({ product, onProductClick }) => (
           <span className="text-red-500 font-medium">
             GH₵{parseFloat(product.price).toFixed(2)}
           </span>
-          {product.rating && (
-            <div className="flex items-center">
-              <FaStar className="text-yellow-400 w-4 h-4 mr-1" />
-              <span className="text-sm text-gray-600">
-                {parseFloat(product.rating).toFixed(1)}
-              </span>
-            </div>
-          )}
         </div>
       </div>
     </motion.div>

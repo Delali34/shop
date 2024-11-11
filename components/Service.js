@@ -21,6 +21,13 @@ const Services = () => {
     },
   };
 
+  const services = [
+    "Provide personalized or Custom-made designs for individuals and businesses.",
+    "Provide Professional styling services that enhances the image of clients significantly.",
+    "Assist client with wardrobe organization and update, shopping guidance, and personal color analysis. Provide Personal Image consulting.",
+    "Provide Corporate Fashion advice that best reflect client budget, lifestyle, body shape and coloring.",
+  ];
+
   return (
     <div className="bg-gradient-to-br font-luxury from-[#FFF1E6] to-[#FFE4D6] py-16 px-4 md:px-8">
       <div className="max-w-[1320px] mx-auto">
@@ -36,29 +43,17 @@ const Services = () => {
               variants={itemVariants}
               className="text-[#E7816B] font-semibold text-lg mb-4"
             >
-              SERVICE
+              OUR SERVICES
             </motion.h3>
             <motion.h2
               variants={itemVariants}
               className="lg:text-4xl text-3xl md:text-5xl font-bold mb-8 text-gray-800 leading-tight"
             >
-              Beyond Neckties: Elevating Your Professional Image
+              Beyond delivering top-notch neckties and accessories we:
             </motion.h2>
-            <motion.p
-              variants={itemVariants}
-              className="mb-8 text-gray-700 text-lg leading-relaxed"
-            >
-              Beyond delivering top-notch neckties and scarves, we provide
-              Professional styling services that enhances the image of clients
-              significantly.
-            </motion.p>
-            <motion.ul variants={itemVariants} className="space-y-6">
-              {[
-                "Provide corporate fashion advice that best reflect client budget, lifestyle, body shape and coloring.",
-                "Assist client with wardrobe organization and update, shopping guidance, and personal color analysis. ",
-                "Provide personal image consulting.",
-              ].map((item, index) => (
-                <motion.li
+            <motion.div variants={containerVariants} className="space-y-6">
+              {services.map((item, index) => (
+                <motion.div
                   key={index}
                   className="flex items-start"
                   variants={itemVariants}
@@ -80,9 +75,9 @@ const Services = () => {
                     </svg>
                   </span>
                   <span className="text-gray-700">{item}</span>
-                </motion.li>
+                </motion.div>
               ))}
-            </motion.ul>
+            </motion.div>
           </motion.div>
           <motion.div
             className="w-full lg:w-1/2"
