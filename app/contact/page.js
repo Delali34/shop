@@ -66,7 +66,7 @@ export default function Contact() {
                 href="mailto:Opulenceties@gmail.com"
                 className="text-gray-700 hover:text-black transition-colors"
               >
-                Opulenceties@gmail.com
+                Support@opulenceties.com
               </a>
             </div>
           </div>
