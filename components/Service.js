@@ -29,7 +29,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br font-luxury from-[#FFF1E6] to-[#FFE4D6] py-16 px-4 md:px-8">
+    <div className="bg-gradient-to-br font-luxury  py-16 px-4 md:px-8">
       <div className="max-w-[1320px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center">
           <motion.div
@@ -41,13 +41,13 @@ const Services = () => {
           >
             <motion.h3
               variants={itemVariants}
-              className="text-[#E7816B] font-semibold text-lg mb-4"
+              className="text-gold font-semibold text-2xl mb-4"
             >
               OUR SERVICES
             </motion.h3>
             <motion.h2
               variants={itemVariants}
-              className="lg:text-4xl text-3xl md:text-5xl font-bold mb-8 text-gray-800 leading-tight"
+              className="lg:text-3xl text-2xl md:text-3xl font-bold mb-8 text-gray-800 leading-tight"
             >
               Beyond delivering top-notch neckties and accessories we:
             </motion.h2>
@@ -86,15 +86,15 @@ const Services = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-full h-[300px]">
               <Image
-                src="/opulence (1).jpeg"
+                src="/IMG_2178.JPG"
                 alt="Professional styling"
                 layout="fill"
-                objectFit="cover"
-                className="rounded-2xl"
+                objectFit="contain"
+                className="object-contain scale-105 mt-16 h-full w-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div> */}
             </div>
           </motion.div>
         </div>

@@ -28,6 +28,30 @@ export async function GET(req, { params }) {
         },
         shippingAddress: true,
         billingAddress: true,
+        user: {
+          select: {
+            email: true,
+            name: true,
+          },
+        },
+        // Include additional payment-related fields
+        select: {
+          id: true,
+          createdAt: true,
+          updatedAt: true,
+          totalAmount: true,
+          subtotal: true,
+          shippingCost: true,
+          status: true,
+          currency: true,
+          // Payment specific fields
+          paymentStatus: true,
+          paymentMethod: true,
+          paymentReference: true,
+          paymentProvider: true,
+          paymentData: true, // This includes the full Paystack response
+          // Include other fields you need
+        },
       },
     });
 
@@ -35,11 +59,36 @@ export async function GET(req, { params }) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ order });
+    // Format the response with clear payment information
+    const formattedOrder = {
+      ...order,
+      payment: {
+        method: order.paymentMethod,
+        status: order.paymentStatus,
+        reference: order.paymentReference,
+        provider: order.paymentProvider,
+        details: order.paymentData, // Contains provider-specific details
+        currency: order.currency,
+      },
+      // Remove redundant fields from the main object
+      paymentMethod: undefined,
+      paymentStatus: undefined,
+      paymentReference: undefined,
+      paymentProvider: undefined,
+      paymentData: undefined,
+    };
+
+    return NextResponse.json({
+      success: true,
+      order: formattedOrder,
+    });
   } catch (error) {
     console.error("Error fetching order:", error);
     return NextResponse.json(
-      { error: "Failed to fetch order" },
+      {
+        success: false,
+        error: "Failed to fetch order",
+      },
       { status: 500 }
     );
   }

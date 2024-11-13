@@ -17,6 +17,7 @@ import { CategoryModal } from "@/components/admin/Modals/CategoryModal";
 import { UserModal } from "@/components/admin/Modals/UserModal";
 import { StatsPanel } from "@/components/admin/StatsPanel";
 import { OrdersTab } from "@/components/admin/OrdersTab";
+import { PaymentsTab } from "@/components/admin/PaymentsTab";
 
 export default function AdminDashboard() {
   // State management
@@ -486,13 +487,7 @@ export default function AdminDashboard() {
       case "orders":
         return <OrdersTab orders={orders} onUpdateOrder={handleUpdateOrder} />;
       case "payments":
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-800">
-              Payments coming soon...
-            </h2>
-          </div>
-        );
+        return <PaymentsTab orders={orders} />;
       default:
         return (
           <div className="p-6">
