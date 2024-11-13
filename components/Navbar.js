@@ -71,6 +71,10 @@ export default function Navbar() {
     setIsProfileMenuOpen(false);
   };
 
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <nav className="bg-black border-b font-luxury sticky top-0 z-50 border-gray-700">
@@ -224,24 +228,28 @@ export default function Navbar() {
             <Link
               href="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+              onClick={closeMobileMenu}
             >
               Home
             </Link>
             <Link
               href="/about"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+              onClick={closeMobileMenu}
             >
               About us
             </Link>
             <Link
               href="/product"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+              onClick={closeMobileMenu}
             >
               Products
             </Link>
             <Link
               href="/contact"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+              onClick={closeMobileMenu}
             >
               Contact
             </Link>
@@ -250,17 +258,22 @@ export default function Navbar() {
                 <Link
                   href="/profile"
                   className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+                  onClick={closeMobileMenu}
                 >
                   Profile
                 </Link>
                 <Link
                   href="/profile"
                   className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+                  onClick={closeMobileMenu}
                 >
                   Order History
                 </Link>
                 <button
-                  onClick={handleSignOut}
+                  onClick={() => {
+                    handleSignOut();
+                    closeMobileMenu();
+                  }}
                   className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
                 >
                   Sign Out
