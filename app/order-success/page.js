@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 export default function OrderSuccessPage() {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [emailSent, setEmailSent] = useState(false);
   const searchParams = useSearchParams();
   const reference = searchParams.get("reference");
 
@@ -34,8 +35,24 @@ export default function OrderSuccessPage() {
           })),
         };
         setOrder(processedOrder);
+
+        // Send email notification
+        const emailResponse = await fetch("/api/send-order-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            orderId: processedOrder.id,
+            reference: processedOrder.paymentReference,
+          }),
+        });
+
+        if (emailResponse.ok) {
+          setEmailSent(true);
+        }
       } catch (error) {
-        console.error("Error fetching order:", error);
+        console.error("Error:", error);
       } finally {
         setLoading(false);
       }

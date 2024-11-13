@@ -78,16 +78,6 @@ export default function ProfilePage() {
                       {session.user.email}
                     </p>
                   </div>
-                  <div className="bg-gray-50 p-3 rounded">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Account Created
-                    </label>
-                    <p className="mt-1 text-gray-900">
-                      {new Date(
-                        session.user.createdAt || Date.now()
-                      ).toLocaleDateString()}
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
