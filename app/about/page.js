@@ -62,16 +62,6 @@ const MessageComponent = () => {
           in crafting custom-made neckties and complementary accessories,
           catering to our clients.
         </motion.p>
-        <motion.div
-          className="inline-block"
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUpVariants}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <p className="text-2xl font-script mb-1">Derrick</p>
-          <p className="text-sm">Founder & CEO</p>
-        </motion.div>
       </div>
 
       <Image />

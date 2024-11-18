@@ -288,6 +288,17 @@ export default function CategoryPage({ params }) {
           <span className="text-gray-900">{categoryData.name}</span>
         </nav>
       </div>
+      {/* Category Header - Add this section */}
+      <div className="max-w-7xl mx-auto px-4 py-12 text-center">
+        <h1 className="lg:text-5xl md:text-4xl text-2xl font-bold mb-4">
+          {categoryData.name}
+        </h1>
+        {categoryData.description && (
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            {categoryData.description}
+          </p>
+        )}
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row">

@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaCircleDot } from "react-icons/fa6";
 
 const Services = () => {
   const containerVariants = {
@@ -29,7 +30,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br font-luxury  py-16 px-4 md:px-8">
+    <div className="bg-gradient-to-br font-luxury  py-16 px-6 md:px-8">
       <div className="max-w-[1320px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center">
           <motion.div
@@ -59,20 +60,7 @@ const Services = () => {
                   variants={itemVariants}
                 >
                   <span className="mr-4 mt-1 flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-[#E7816B]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
+                    <FaCircleDot className="text-gold" />
                   </span>
                   <span className="text-gray-700">{item}</span>
                 </motion.div>
@@ -86,13 +74,13 @@ const Services = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="relative w-full h-[300px]">
+            <div className="relative w-full h-[400px]">
               <Image
-                src="/IMG_2178.JPG"
+                src="/tools.jpeg"
                 alt="Professional styling"
                 layout="fill"
                 objectFit="contain"
-                className="object-contain scale-105 mt-16 h-full w-full"
+                className="object-contain scale-105 mt-12 h-full w-full"
               />
               {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div> */}
             </div>

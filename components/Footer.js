@@ -81,7 +81,7 @@ export default function Footer() {
               <FaInstagram />
             </a>
             <a href="#" className="hover:text-white">
-              <FaTwitter />
+              <FaFacebookF />
             </a>
 
             <a href="#" className="hover:text-white">
