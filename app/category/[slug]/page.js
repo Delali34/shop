@@ -294,7 +294,7 @@ export default function CategoryPage({ params }) {
           {categoryData.name}
         </h1>
         {categoryData.description && (
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 tracking-wider max-w-3xl mx-auto">
             {categoryData.description}
           </p>
         )}

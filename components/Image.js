@@ -57,7 +57,7 @@ const TeamMember = ({ member }) => (
       <h3 className="text-lg uppercase tracking-wider mb-2 font-luxury">
         {member.name}
       </h3>
-      <p className="text-red-500 font-medium mb-2">{member.role}</p>
+      <p className="text-gold font-medium mb-2">{member.role}</p>
       <p className="text-gray-600 text-sm">{member.description}</p>
     </div>
   </motion.div>

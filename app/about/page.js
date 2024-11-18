@@ -39,7 +39,7 @@ const MessageComponent = () => {
   };
 
   return (
-    <section className="bg-[#FFF9F2] relative overflow-hidden pt-16">
+    <section className=" relative overflow-hidden pt-16">
       <div className="max-w-4xl font-luxury mx-auto px-4 text-center relative z-10">
         <motion.h1
           className="md:text-4xl lg:text-5xl text-3xl font-bold mb-6"
