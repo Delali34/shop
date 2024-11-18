@@ -1,12 +1,12 @@
 import React from "react";
-import { Phone, Instagram, Mail } from "lucide-react";
+import { Phone, Instagram, Mail, Facebook } from "lucide-react";
 
 export default function Contact() {
   return (
     <div
       className="min-h-screen font-luxury flex items-center justify-center"
       style={{
-        backgroundImage: "url('/opulence (3).jpeg')",
+        backgroundImage: "url('/clients.JPG')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -53,6 +53,21 @@ export default function Contact() {
                   target="_blank"
                 >
                   @opulence_ties
+                </a>
+              </div>
+
+              {/* Facebook Section */}
+              <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+                <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                  <Facebook className="w-6 h-6" />
+                  Facebook
+                </h2>
+                <a
+                  href="https://facebook.com/opulenceties"
+                  className="text-gray-700 hover:text-black transition-colors"
+                  target="_blank"
+                >
+                  @opulenceties
                 </a>
               </div>
             </div>
