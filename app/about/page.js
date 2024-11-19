@@ -40,15 +40,16 @@ const MessageComponent = () => {
 
   return (
     <section className=" relative overflow-hidden pt-16">
-      <div className="max-w-4xl font-luxury mx-auto px-4 text-center relative z-10">
+      <Image />
+      <div className="max-w-4xl py-10 font-luxury mx-auto px-4 text-center relative z-10">
         <motion.h1
-          className="md:text-4xl lg:text-5xl text-3xl font-bold mb-6"
+          className="md:text-4xl lg:text-5xl text-3xl mb-6"
           initial="hidden"
           animate="visible"
           variants={fadeInUpVariants}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Premium Neckties for the Discerning Professional
+          Opulence Accessories
         </motion.h1>
         <motion.p
           className="text-lg mb-8"
@@ -64,7 +65,6 @@ const MessageComponent = () => {
         </motion.p>
       </div>
 
-      <Image />
       <Services />
       <Clients />
     </section>
