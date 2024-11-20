@@ -96,7 +96,10 @@ export default function Navbar() {
                 About Us
               </Link>
               <Link href="/product" className="text-white hover:text-gold">
-                Products
+                Shop
+              </Link>
+              <Link href="/product" className="text-white hover:text-gold">
+                Custom
               </Link>
               <Link href="/contact" className="text-white hover:text-gold">
                 Contact

@@ -58,10 +58,10 @@ const MessageComponent = () => {
           variants={fadeInUpVariants}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          A premium necktie manufacturing business, catering to
+          A premium necktie and accessories manufacturing business, catering to
           fashion-conscious professionals and businesses. . Our expertise lies
           in crafting custom-made neckties and complementary accessories,
-          catering to our clients.
+          catering
         </motion.p>
       </div>
 

@@ -48,7 +48,7 @@ const Services = () => {
             </motion.h3>
             <motion.h2
               variants={itemVariants}
-              className="lg:text-3xl text-2xl md:text-3xl font-bold mb-8 text-gray-800 leading-tight"
+              className="lg:text-2xl text-xl md:text-2xl font-bold mb-8 text-gray-800 leading-tight"
             >
               Beyond delivering top-notch neckties and accessories we:
             </motion.h2>
