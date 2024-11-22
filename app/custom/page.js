@@ -20,7 +20,7 @@ const CustomLogoTies = () => {
           animate="visible"
           transition={{ duration: 0.6, delay: 0.2 }}
         />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-black/80" />
 
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center lg:px-4">
           <motion.h1
