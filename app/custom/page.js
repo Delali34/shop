@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const CustomLogoTies = () => {
   const fadeInUpVariants = {
@@ -10,7 +11,7 @@ const CustomLogoTies = () => {
 
   return (
     <section className="relative font-luxury overflow-hidden ">
-      <div className="relative h-96 md:h-[32rem] lg:h-[40rem] overflow-hidden">
+      <div className="relative h-[350px] overflow-hidden">
         <motion.img
           src="/image (1).jpeg"
           alt="Custom Logo Ties"
