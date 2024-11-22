@@ -98,7 +98,7 @@ export default function Navbar() {
               <Link href="/product" className="text-white hover:text-gold">
                 Shop
               </Link>
-              <Link href="/" className="text-white hover:text-gold">
+              <Link href="/custom" className="text-white hover:text-gold">
                 Custom
               </Link>
               <Link href="/contact" className="text-white hover:text-gold">
@@ -250,7 +250,7 @@ export default function Navbar() {
               Shop
             </Link>
             <Link
-              href=""
+              href="/custom"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
               onClick={closeMobileMenu}
             >
