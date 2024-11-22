@@ -18,7 +18,6 @@ const CustomLogoTies = () => {
           className="w-full h-full object-cover transform transition-transform duration-[8s] ease-in-out hover:scale-105"
           initial="hidden"
           animate="visible"
-          variants={fadeInUpVariants}
           transition={{ duration: 0.6, delay: 0.2 }}
         />
         <div className="absolute inset-0 bg-black/70" />
@@ -72,7 +71,7 @@ const CustomLogoTies = () => {
             branded message on the strap.
           </motion.p>
           <motion.a
-            href="#"
+            href=""
             className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-md inline-block"
             initial="hidden"
             animate="visible"
@@ -119,7 +118,7 @@ const CustomLogoTies = () => {
             sizes and styles to choose from.
           </motion.p>
           <motion.a
-            href="#"
+            href=""
             className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-md inline-block"
             initial="hidden"
             animate="visible"
@@ -165,7 +164,7 @@ const CustomLogoTies = () => {
             a jacket pocket.
           </motion.p>
           <motion.a
-            href="#"
+            href=""
             className="bg-red-500 hover:bg-red-600 text-white py-3 px-6 rounded-md inline-block"
             initial="hidden"
             animate="visible"
