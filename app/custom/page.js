@@ -10,8 +10,8 @@ const CustomLogoTies = () => {
   };
 
   return (
-    <section className="relative font-luxury overflow-hidden ">
-      <div className="relative h-[350px] overflow-hidden">
+    <section className="relative font-luxury  ">
+      <div className="relative h-[350px]">
         <motion.img
           src="/image (1).jpeg"
           alt="Custom Logo Ties"
