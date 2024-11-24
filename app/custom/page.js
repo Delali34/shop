@@ -82,7 +82,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/image (2).jpeg"
+            src="/IMG_3858.PNG"
             alt="Custom Bow Tie"
             className="w-full h-full object-cover"
             initial="hidden"
@@ -176,7 +176,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/image (3).jpeg"
+            src="/IMG_3859.PNG"
             alt="Custom Scarf"
             className="w-full h-full object-cover"
             initial="hidden"
@@ -222,7 +222,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/image3.jpg"
+            src="/IMG_3860.JPG"
             alt="Custom Pocket Square"
             className="w-full h-full object-cover"
             initial="hidden"
