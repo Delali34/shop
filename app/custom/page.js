@@ -39,10 +39,8 @@ const CustomLogoTies = () => {
             variants={fadeInUpVariants}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            We create branded tie designs incorporating logo pattern repeats,
-            single placements or full artwork prints with all the sizes needed
-            to outfit a team. Custom tie tags are also available to add a brand
-            statement or special message.
+            We make it easy to create amazing branded accessories that match
+            your brand.
           </motion.p>
         </div>
       </div>
@@ -82,7 +80,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/IMG_3858.PNG"
+            src="/custom.jpeg"
             alt="Custom Bow Tie"
             className="w-full h-full object-cover"
             initial="hidden"
@@ -129,7 +127,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/image (2).jpeg"
+            src="/custom bow tie.jpeg"
             alt="Custom Bow Tie"
             className="w-full h-full object-cover"
             initial="hidden"
