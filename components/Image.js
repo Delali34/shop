@@ -24,7 +24,7 @@ const TeamMember = ({ member }) => (
           alt={member.name}
           width={500}
           height={500}
-          className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-[500px] object-contain transition-transform duration-300 group-hover:scale-105"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/placeholder.png";
@@ -54,11 +54,11 @@ const TeamMember = ({ member }) => (
       </div>
     </div>
     <div className="py-6">
-      <h3 className="text-lg uppercase tracking-wider mb-2 font-luxury">
+      <h3 className="text-lg uppercase text-center tracking-wider mb-2 font-luxury">
         {member.name}
       </h3>
-      <p className="text-gold font-medium mb-2">{member.role}</p>
-      <p className="text-gray-600 text-sm">{member.description}</p>
+      <p className="text-gold text-center font-medium mb-2">{member.role}</p>
+      <p className="text-gray-600 text-center text-sm">{member.description}</p>
     </div>
   </motion.div>
 );
@@ -66,11 +66,10 @@ const TeamMember = ({ member }) => (
 const Team = () => {
   const teamMembers = [
     {
-      image: "/image (1).jpeg",
-      name: "Sarah Johnson",
-      role: "Lead Designer",
-      description:
-        "With over 10 years of experience in haute couture, Sarah brings creativity and excellence to every design.",
+      image: "/Derrick.jpg",
+      name: "Derrick",
+      role: "Founder & CEO",
+      description: "",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
         { icon: <FaInstagram className="text-xl" />, link: "#" },
@@ -78,11 +77,10 @@ const Team = () => {
       ],
     },
     {
-      image: "/image (2).jpeg",
-      name: "Michael Chen",
-      role: "Master Tailor",
-      description:
-        "Michael's precision and attention to detail ensure every garment meets our highest standards.",
+      image: "/image (3).jpeg",
+      name: "Emma Roberts",
+      role: "Creative Director",
+      description: "",
       socials: [
         { icon: <FaInstagram className="text-xl" />, link: "#" },
         { icon: <FaTwitter className="text-xl" />, link: "#" },
@@ -90,11 +88,10 @@ const Team = () => {
       ],
     },
     {
-      image: "/image (3).jpeg",
-      name: "Emma Roberts",
-      role: "Creative Director",
-      description:
-        "Emma's vision and innovative approach help shape our brand's distinctive style and direction.",
+      image: "/nana.JPEG",
+      name: "Nana Yaw Boahene",
+      role: "Business Partner ",
+      description: "",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
         { icon: <FaInstagram className="text-xl" />, link: "#" },

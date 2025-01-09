@@ -13,7 +13,7 @@ const CustomLogoTies = () => {
     <section className="relative font-luxury  ">
       <div className="relative h-[350px]">
         <motion.img
-          src="/image (1).jpeg"
+          src="/custom.JPG"
           alt="Custom Logo Ties"
           className="w-full h-full object-cover transform transition-transform duration-[8s] ease-in-out hover:scale-105"
           initial="hidden"
