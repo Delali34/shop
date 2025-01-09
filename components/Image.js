@@ -69,7 +69,7 @@ const Team = () => {
       image: "/Derrick.jpg",
       name: "Derick",
       role: "Founder & CEO",
-      description: "",
+      description: "Business Partner",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
         { icon: <FaInstagram className="text-xl" />, link: "#" },
@@ -78,8 +78,8 @@ const Team = () => {
     },
     {
       image: "/image (3).jpeg",
-      name: "Emma Roberts",
-      role: "Creative Director",
+      name: "Prince Kelly",
+      role: "",
       description: "",
       socials: [
         { icon: <FaInstagram className="text-xl" />, link: "#" },
@@ -90,7 +90,7 @@ const Team = () => {
     {
       image: "/nana.JPEG",
       name: "Nana Yaw Boahene",
-      role: "Business Partner ",
+      role: "Business Partner",
       description: "",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
