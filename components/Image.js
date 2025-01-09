@@ -67,7 +67,7 @@ const Team = () => {
   const teamMembers = [
     {
       image: "/Derrick.jpg",
-      name: "Derrick",
+      name: "Derick",
       role: "Founder & CEO",
       description: "",
       socials: [
