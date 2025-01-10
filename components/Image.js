@@ -77,9 +77,9 @@ const Team = () => {
       ],
     },
     {
-      image: "/image (3).jpeg",
+      image: "/prince2.jpg",
       name: "Prince Kelly",
-      role: "",
+      role: "Business Development Manager",
       description: "",
       socials: [
         { icon: <FaInstagram className="text-xl" />, link: "#" },
