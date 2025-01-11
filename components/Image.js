@@ -69,7 +69,7 @@ const Team = () => {
       image: "/Derrick.jpg",
       name: "Derick",
       role: "Founder & CEO",
-      description: "Business Partner",
+      description: "",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
         { icon: <FaInstagram className="text-xl" />, link: "#" },
