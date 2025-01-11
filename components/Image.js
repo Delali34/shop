@@ -71,9 +71,14 @@ const Team = () => {
       role: "Founder & CEO",
       description: "",
       socials: [
-        { icon: <FaFacebookF className="text-xl" />, link: "#" },
-        { icon: <FaInstagram className="text-xl" />, link: "#" },
-        { icon: <FaLinkedinIn className="text-xl" />, link: "#" },
+        {
+          icon: <FaFacebookF className="text-xl" />,
+          link: "https://www.facebook.com/share/15ZYkXAugs/?mibextid=LQQJ4d",
+        },
+        {
+          icon: <FaInstagram className="text-xl" />,
+          link: "https://www.instagram.com/ehla_derick?igsh=ZHZzcng2ZTVrZmM%3D&utm_source=qr",
+        },
       ],
     },
     {
@@ -82,9 +87,10 @@ const Team = () => {
       role: "Business Development Manager",
       description: "",
       socials: [
-        { icon: <FaInstagram className="text-xl" />, link: "#" },
-        { icon: <FaTwitter className="text-xl" />, link: "#" },
-        { icon: <FaLinkedinIn className="text-xl" />, link: "#" },
+        {
+          icon: <FaLinkedinIn className="text-xl" />,
+          link: "http://linkedin.com/in/prince-kelly-anyomitse",
+        },
       ],
     },
     {
