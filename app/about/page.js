@@ -41,7 +41,7 @@ const MessageComponent = () => {
   return (
     <section className=" relative overflow-hidden pt-16">
       <Image />
-      <div className="max-w-4xl py-10 font-luxury mx-auto px-4 text-center relative z-10">
+      {/* <div className="max-w-4xl py-10 font-luxury mx-auto px-4 text-center relative z-10">
         <motion.h1
           className="md:text-4xl lg:text-5xl text-3xl mb-6"
           initial="hidden"
@@ -63,7 +63,7 @@ const MessageComponent = () => {
           in crafting custom-made neckties and complementary accessories,
           catering
         </motion.p>
-      </div>
+      </div> */}
 
       <Services />
       <Clients />
