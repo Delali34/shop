@@ -60,11 +60,11 @@ export default function HeroSection() {
             OFFICIAL WEBSITE
           </button>
 
-          <h1 className="text-4xl lg:text-5xl font-extrabold font-luxury leading-tight text-gold text-center lg:text-left mb-8">
+          <h1 className="text-4xl lg:text-5xl font-bold font-luxury leading-tight text-gold text-center lg:text-left mb-8">
             Discover Your <br /> Favourite <br />
             <span className="relative inline-block min-h-[1.5em]">
               <span
-                className={`absolute lg:left-0 -left-[85px]  transition-all duration-500 ${
+                className={`absolute lg:left-0 -left-[105px]  transition-all duration-500 ${
                   currentText === 0
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
@@ -73,7 +73,7 @@ export default function HeroSection() {
                 Collections.
               </span>
               <span
-                className={`absolute -left-[85px] lg:left-0 transition-all duration-500 ${
+                className={`absolute -left-[108px] lg:left-0 transition-all duration-500 ${
                   currentText === 1
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"

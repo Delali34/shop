@@ -27,7 +27,7 @@ module.exports = {
       sans2: ["Bricolage Grotesque", "sans-serif"],
       serif: ["Merriweather", "serif"],
       script: ["Eyesome Script", "cursive"],
-      luxury: ["Rollgates Luxury", "serif"],
+      luxury: ["Poppins", "sans-serif"],
     },
   },
   plugins: [

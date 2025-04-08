@@ -26,8 +26,7 @@ export default function Clients() {
             organizations.
           </p>
           <div className="grid md:grid-cols-2 gap-8 mt-12">
-            {/* Individuals Section */}
-            <div className=" backdrop-blur-sm p-6 rounded-lg bg-white transition-colors duration-300">
+            {/* <div className=" backdrop-blur-sm p-6 rounded-lg bg-white transition-colors duration-300">
               <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
                 <Users className="w-6 h-6" />
                 Individuals
@@ -51,10 +50,9 @@ export default function Clients() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
 
-            {/* Institutions Section */}
-            <div className="bg-white backdrop-blur-sm p-6 rounded-lg  transition-colors duration-300">
+            {/* <div className="bg-white backdrop-blur-sm p-6 rounded-lg  transition-colors duration-300">
               <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
                 <Building2 className="w-6 h-6" />
                 Institutions
@@ -79,7 +77,7 @@ export default function Clients() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
