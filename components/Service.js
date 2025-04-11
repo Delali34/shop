@@ -32,6 +32,20 @@ const Services = () => {
   return (
     <div className="bg-gradient-to-br font-luxury  py-16 px-6 md:px-8">
       <div className="max-w-[1320px] mx-auto">
+        <div>
+          <h1 className="text-sm sm:text-xl md:text-2xl mb-20 text-center">
+            A{" "}
+            <span className="text-gold font-semibold">
+              Ghanaian necktie and scarves
+            </span>{" "}
+            manufacturing business, catering to fashion-conscious professionals
+            and businesses. Our expertise lies in crafting{" "}
+            <span className="text-gold font-semibold">
+              custom-made neckties and complementary accessories
+            </span>{" "}
+            , catering to our clients.
+          </h1>
+        </div>
         <div className="flex flex-col lg:flex-row items-center">
           <motion.div
             className="w-full lg:w-1/2 lg:pr-16 mb-12 lg:mb-0"

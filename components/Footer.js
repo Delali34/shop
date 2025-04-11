@@ -29,6 +29,7 @@ export default function Footer() {
               </li>
 
               <li className="mb-2">Phone: +1 (914) 267-7187</li>
+              <li className="mb-2">Email: Opulenceties@gmail.com</li>
               <li className="mb-2">Email: Support@opulenceties.com</li>
             </ul>
           </div>
