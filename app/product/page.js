@@ -26,7 +26,7 @@ const priceRanges = [
 const ProductsSkeleton = () => (
   <div className="animate-pulse">
     <div className="max-w-7xl mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div key={i} className="bg-gray-100 h-[400px]">
             <div className="h-[300px] bg-gray-200 mb-4"></div>
@@ -565,7 +565,7 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Products Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
                   {filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
