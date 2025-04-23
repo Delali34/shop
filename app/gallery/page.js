@@ -35,31 +35,61 @@ const GalleryPage = () => {
   const galleryItems = [
     {
       id: 1,
-      image: "/clients.JPG",
+      image: "/gallery/gal (1).JPG",
       title: "Classic Silk Tie",
       description: "Hand-crafted pure silk tie in navy blue",
     },
     {
       id: 2,
-      image: "/clients.JPG",
+      image: "/gallery/gal (1).PNG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
     {
       id: 3,
-      image: "/clients.JPG",
+      image: "/gallery/gal (2).JPG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
     {
       id: 4,
-      image: "/clients.JPG",
+      image: "/gallery/gal (2).PNG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
     {
       id: 5,
-      image: "/clients.JPG",
+      image: "/gallery/gal (3).JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 6,
+      image: "/gallery/gal (4).JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 7,
+      image: "/gallery/gal (5).JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 8,
+      image: "/gallery/gal (6).JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 9,
+      image: "/gallery/gal (7).JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 10,
+      image: "/gallery/gal (8).JPG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
@@ -183,10 +213,10 @@ const GalleryPage = () => {
                         <FaSearch className="text-white text-3xl" />
                       </div>
                     </div>
-                    <div className="p-4 text-center">
+                    {/* <div className="p-4 text-center">
                       <h3 className="text-xl font-luxury">{item.title}</h3>
                       <p className="text-gray-600">{item.description}</p>
-                    </div>
+                    </div> */}
                   </motion.div>
                 ))}
               </div>

@@ -101,15 +101,15 @@ export default function Navbar() {
               <Link href="/custom" className="text-white hover:text-gold">
                 Custom
               </Link>
-              <Link href="/contact" className="text-white hover:text-gold">
-                Contact
-              </Link>
               <Link
                 href="/gallery"
                 className="text-white hover:text-gold"
                 onClick={closeMobileMenu}
               >
                 Gallery
+              </Link>
+              <Link href="/contact" className="text-white hover:text-gold">
+                Contact
               </Link>
             </div>
 
@@ -264,19 +264,20 @@ export default function Navbar() {
               Custom
             </Link>
             <Link
-              href="/contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
-              onClick={closeMobileMenu}
-            >
-              Contact
-            </Link>
-            <Link
               href="/gallery"
               className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
               onClick={closeMobileMenu}
             >
               Gallery
             </Link>
+            <Link
+              href="/contact"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-gold"
+              onClick={closeMobileMenu}
+            >
+              Contact
+            </Link>
+
             {session && (
               <>
                 <Link
