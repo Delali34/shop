@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function HeroSection() {
-  const images = ["/image (1).jpeg", "/image (2).jpeg", "/image (3).jpeg"];
+  const images = [
+    "/image (1).jpeg",
+    "/image (2).jpeg",
+    "/image (3).jpeg",
+    "/hero.jpg",
+  ];
   const texts = ["Collections", "Accessories"];
 
   const [currentImage, setCurrentImage] = useState(0);

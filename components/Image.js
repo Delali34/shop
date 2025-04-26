@@ -15,27 +15,27 @@ const TeamMember = ({ member }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    className=" overflow-hidden group"
+    className="overflow-hidden group"
   >
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden h-[350px] bg-gray-100 flex items-center justify-center">
       {member.image ? (
         <Image
           src={member.image}
           alt={member.name}
           width={500}
           height={500}
-          className="w-full h-[350px] object-contain transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-full object-contain transition-transform duration-300"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/placeholder.png";
           }}
         />
       ) : (
-        <div className="w-full h-[350px] bg-gray-200 flex items-center justify-center">
+        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
           <FaImage className="text-gray-400 text-4xl" />
         </div>
       )}
-      <div className="absolute   inset-0 bg-gradient-to-t  to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <div className="flex gap-4 justify-center">
             {member.socials.map((social, index) => (
@@ -107,7 +107,7 @@ const Team = () => {
   ];
 
   return (
-    <div className="min-h-screen font-luxury font-medium ">
+    <div className="min-h-screen font-luxury font-medium">
       <div className="max-w-[1320px] mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
