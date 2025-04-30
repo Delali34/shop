@@ -65,7 +65,7 @@ const GalleryPage = () => {
     },
     {
       id: 6,
-      image: "/gallery/gal (4).JPG",
+      image: "/gallery/ga.PNG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
