@@ -132,7 +132,7 @@ export default function Trends() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => (
             <div
               key={category.id}
@@ -167,16 +167,16 @@ export default function Trends() {
                       <p className="text-sm uppercase tracking-wider mb-2 text-gold">
                         Collection
                       </p>
-                      <h3 className="text-xl font-bold mb-4">
+                      <h3 className="text-lg font-bold mb-4">
                         {category.name}
                       </h3>
 
                       <div className="flex items-center justify-between">
-                        <div className="inline-flex items-center bg-white text-black md:px-6 px-4 py-2 sm:text-sm text-[10px] uppercase tracking-wider hover:bg-gray-200 transition-colors duration-300 rounded">
+                        <div className="inline-flex items-center bg-white text-black md:px-6 px-4 py-2 text-[10px] uppercase tracking-wider hover:bg-gray-200 transition-colors duration-300 rounded">
                           VIEW COLLECTION
                           <FaArrowRight className="ml-2" />
                         </div>
-                        <span className="text-gold md:text-sm text-xs">
+                        <span className="text-gold lg:text-sm text-xs">
                           {category.product_count || 0} Products
                         </span>
                       </div>

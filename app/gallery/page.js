@@ -53,13 +53,13 @@ const GalleryPage = () => {
     },
     {
       id: 4,
-      image: "/gallery/gal (2).PNG",
+      image: "/gal2.JPG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
     {
       id: 5,
-      image: "/gallery/gal (3).JPG",
+      image: "/gal1.JPG",
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
