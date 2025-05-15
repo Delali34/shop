@@ -20,7 +20,7 @@ const CustomLogoTies = () => {
           animate="visible"
           transition={{ duration: 0.6, delay: 0.2 }}
         />
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-black/50" />
 
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center lg:px-4">
           <motion.h1
@@ -79,15 +79,39 @@ const CustomLogoTies = () => {
           </motion.a>
         </div>
         <div>
-          <motion.img
-            src="/custom.jpeg"
-            alt="Custom Bow Tie"
-            className="w-full h-full object-cover"
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUpVariants}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          />
+          <div>
+            <motion.img
+              src="/cus (1).JPG"
+              alt="Custom Bow Tie"
+              className="w-full h-full object-contain"
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUpVariants}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            />
+            <div>
+              <motion.img
+                src="/cus (2).JPG"
+                alt="Custom Bow Tie"
+                className="w-full h-full object-contain"
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUpVariants}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              />
+            </div>
+            <div>
+              <motion.img
+                src="/cus.JPG"
+                alt="Custom Bow Tie"
+                className="w-full h-full object-contain"
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUpVariants}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -174,7 +198,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/IMG_3859.PNG"
+            src="/scar.JPG"
             alt="Custom Scarf"
             className="w-full h-full object-cover"
             initial="hidden"
