@@ -340,7 +340,7 @@ export default function CategoryPage({ params }) {
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
               {sortedAndFilteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
