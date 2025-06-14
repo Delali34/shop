@@ -111,6 +111,17 @@ const CustomLogoTies = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               />
             </div>
+            <div>
+              <motion.img
+                src="/newit.jpg"
+                alt="Custom Bow Tie"
+                className="w-full h-full object-contain"
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUpVariants}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -151,7 +162,7 @@ const CustomLogoTies = () => {
         </div>
         <div>
           <motion.img
-            src="/custom bow tie.jpeg"
+            src="/replace.jpeg"
             alt="Custom Bow Tie"
             className="w-full h-full object-cover"
             initial="hidden"

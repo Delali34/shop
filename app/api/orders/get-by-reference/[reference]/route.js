@@ -20,37 +20,72 @@ export async function GET(req, { params }) {
         paymentReference: reference,
         userId: session.user.id,
       },
-      include: {
+      select: {
+        id: true,
+        createdAt: true,
+        updatedAt: true,
+        totalAmount: true,
+        subtotal: true,
+        shippingCost: true,
+        status: true,
+        currency: true,
+        trackingNumber: true,
+        shippingMethod: true,
+        // Payment specific fields
+        paymentStatus: true,
+        paymentMethod: true,
+        paymentReference: true,
+        paymentProvider: true,
+        paymentData: true,
+        // Related data with nested selects
         orderItems: {
-          include: {
-            product: true,
+          select: {
+            id: true,
+            quantity: true,
+            priceAtTime: true,
+            product: {
+              select: {
+                id: true,
+                name: true,
+                brand: true,
+                price: true,
+                description: true,
+                imageUrl: true,
+              },
+            },
           },
         },
-        shippingAddress: true,
-        billingAddress: true,
+        shippingAddress: {
+          select: {
+            id: true,
+            type: true,
+            streetAddress: true,
+            apartment: true,
+            city: true,
+            state: true,
+            postalCode: true,
+            country: true,
+            phone: true,
+          },
+        },
+        billingAddress: {
+          select: {
+            id: true,
+            type: true,
+            streetAddress: true,
+            apartment: true,
+            city: true,
+            state: true,
+            postalCode: true,
+            country: true,
+            phone: true,
+          },
+        },
         user: {
           select: {
             email: true,
             name: true,
           },
-        },
-        // Include additional payment-related fields
-        select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
-          totalAmount: true,
-          subtotal: true,
-          shippingCost: true,
-          status: true,
-          currency: true,
-          // Payment specific fields
-          paymentStatus: true,
-          paymentMethod: true,
-          paymentReference: true,
-          paymentProvider: true,
-          paymentData: true, // This includes the full Paystack response
-          // Include other fields you need
         },
       },
     });

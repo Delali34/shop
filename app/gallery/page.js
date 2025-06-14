@@ -93,6 +93,24 @@ const GalleryPage = () => {
       title: "Evening Bow Tie",
       description: "Black satin bow tie",
     },
+    {
+      id: 11,
+      image: "/gallery/gal5.PNG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 12,
+      image: "/gallery/gal9.jpg",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
+    {
+      id: 13,
+      image: "/gallery/gal10.JPG",
+      title: "Evening Bow Tie",
+      description: "Black satin bow tie",
+    },
   ];
 
   const featuredClients = [

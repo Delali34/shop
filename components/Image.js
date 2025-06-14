@@ -66,7 +66,7 @@ const TeamMember = ({ member }) => (
 const Team = () => {
   const teamMembers = [
     {
-      image: "/Derrick.jpg",
+      image: "/der.jpg",
       name: "Derick",
       role: "Founder & CEO",
       description: "",
@@ -83,7 +83,7 @@ const Team = () => {
     },
     {
       image: "/prince2.jpg",
-      name: "Prince Kelly",
+      name: "Prince",
       role: "Business Development Manager",
       description: "",
       socials: [
@@ -95,8 +95,8 @@ const Team = () => {
     },
     {
       image: "/nana.JPEG",
-      name: "Nana Yaw Boahene",
-      role: "Business Partner",
+      name: "Nana Yaw",
+      role: "Business Associate",
       description: "",
       socials: [
         { icon: <FaFacebookF className="text-xl" />, link: "#" },
@@ -114,7 +114,7 @@ const Team = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-luxury mb-4">
+          <h2 className="text-3xl md:text-4xl font-luxury mb-4">
             Meet Our Team
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

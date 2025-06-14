@@ -124,7 +124,7 @@ export default function Trends() {
     <div className="bg-white font-luxury py-16">
       <div className="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="lg:text-6xl text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="lg:text-4xl text-3xl font-bold text-gray-900 mb-4">
             Our Collections
           </h2>
           <p className="text-gray-600">
