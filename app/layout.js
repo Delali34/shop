@@ -42,7 +42,7 @@ export const metadata = {
     siteName: "Opulence Ties",
     images: [
       {
-        url: "https://opengraph.b-cdn.net/production/images/9b551ec2-3fb7-430b-bef0-032f9ff651b3.png?token=HtYex2I2b3zks1nEjLqegR9UDAPmVPMhl71AaCxVAoo&height=900&width=1200&expires=33289906002",
+        url: "https://opengraph.b-cdn.net/production/images/66dc044b-7407-447b-8caa-ba7ba3325438.jpg?token=R66bR_rptX0hicxHFPNqWU6FiSzPInJNxSByT6K4vF8&height=900&width=1200&expires=33289907680",
         width: 1200,
         height: 900,
         alt: "Opulence Ties - Premium Luxury Fashion Collection",
@@ -57,7 +57,7 @@ export const metadata = {
     description:
       "Discover premium luxury fashion and accessories at Opulence Ties. Curated collection of high-end ties, fashion pieces, and exclusive accessories.",
     images: [
-      "https://opengraph.b-cdn.net/production/images/9b551ec2-3fb7-430b-bef0-032f9ff651b3.png?token=HtYex2I2b3zks1nEjLqegR9UDAPmVPMhl71AaCxVAoo&height=900&width=1200&expires=33289906002",
+      "https://opengraph.b-cdn.net/production/images/66dc044b-7407-447b-8caa-ba7ba3325438.jpg?token=R66bR_rptX0hicxHFPNqWU6FiSzPInJNxSByT6K4vF8&height=900&width=1200&expires=33289907680",
     ],
     creator: "@opulenceties",
   },
