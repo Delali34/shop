@@ -70,7 +70,7 @@ export default function CheckoutPage() {
   }, []);
 
   const subtotal = getSubtotal();
-  const shippingCost = 20.0;
+  const shippingCost = 0.0;
   const totalAmount = subtotal + shippingCost;
 
   // Validate form whenever formData or sameAsBilling changes
