@@ -5,6 +5,13 @@ import { useSession } from "next-auth/react";
 import useCartStore from "@/store/cartStore";
 import { PaystackButton } from "react-paystack";
 
+const calculatePaystackFee = (amount) => {
+  const percentageFee = amount * 0.0195;
+  const flatFee = 0.5;
+  const totalFee = percentageFee + flatFee;
+  return Math.min(totalFee, 2000);
+};
+
 export default function CheckoutPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -50,7 +57,7 @@ export default function CheckoutPage() {
         "billingState",
         "billingPostalCode",
         "billingCountry",
-        "billingPhone"
+        "billingPhone",
       );
     }
 
@@ -71,9 +78,9 @@ export default function CheckoutPage() {
 
   const subtotal = getSubtotal();
   const shippingCost = 0.0;
-  const totalAmount = subtotal + shippingCost;
+  const paystackFee = calculatePaystackFee(subtotal + shippingCost);
+  const totalAmount = subtotal + shippingCost + paystackFee;
 
-  // Validate form whenever formData or sameAsBilling changes
   useEffect(() => {
     validateForm();
   }, [formData, sameAsBilling]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -84,7 +91,7 @@ export default function CheckoutPage() {
         router.push(`/login?callbackUrl=${encodeURIComponent("/checkout")}`);
       } else if (items.length === 0 && searchParams.get("reference")) {
         router.push(
-          `/order-success?reference=${searchParams.get("reference")}`
+          `/order-success?reference=${searchParams.get("reference")}`,
         );
       }
     }
@@ -470,6 +477,10 @@ export default function CheckoutPage() {
                 <div className="flex justify-between">
                   <span>Shipping</span>
                   <span>GH₵{shippingCost.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-gray-500">
+                  <span>Transaction Fee</span>
+                  <span>GH₵{paystackFee.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between font-bold mt-2">
                   <span>Total</span>
