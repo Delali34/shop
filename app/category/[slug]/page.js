@@ -13,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { getRestockInfo, formatRestockLabel } from "@/utils/restock";
 
 // Updated Constants
 const filterOptions = [
@@ -84,6 +85,19 @@ const ProductCard = ({ product }) => (
           )}
           <span className="text-red-500">GH₵{product.price}</span>
         </div>
+        {(product.stockQuantity ?? 0) === 0 && (() => {
+          const info = getRestockInfo(product);
+          return (
+            <p className="text-xs text-red-500 mt-2">
+              Out of Stock
+              {info && (
+                <span className="block text-amber-600">
+                  {formatRestockLabel(info)}
+                </span>
+              )}
+            </p>
+          );
+        })()}
       </div>
     </motion.div>
   </Link>

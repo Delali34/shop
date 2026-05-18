@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaRegSadTear, FaFilter, FaTimes } from "react-icons/fa";
+import { getRestockInfo, formatRestockLabel } from "@/utils/restock";
 
 // Enhanced filter options
 const filterOptions = [
@@ -72,9 +73,19 @@ const ProductCard = ({ product }) => (
             Only {product.stockQuantity} left in stock!
           </p>
         )}
-        {product.stockQuantity === 0 && (
-          <p className="text-xs text-red-500 mt-2">Out of Stock</p>
-        )}
+        {product.stockQuantity === 0 && (() => {
+          const info = getRestockInfo(product);
+          return (
+            <p className="text-xs text-red-500 mt-2">
+              Out of Stock
+              {info && (
+                <span className="block text-amber-600">
+                  {formatRestockLabel(info)}
+                </span>
+              )}
+            </p>
+          );
+        })()}
       </div>
     </motion.div>
   </Link>

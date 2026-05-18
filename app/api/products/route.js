@@ -2,6 +2,28 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/adminGuard";
 
+// Resolve incoming restock input into an absolute DateTime or null.
+// Accepts either `restock_days` (number, days from now) or `restock_date`
+// (ISO string). Returns `undefined` if neither was provided so the caller
+// can decide whether to leave the existing value untouched.
+function resolveRestockDate(body) {
+  const daysRaw = body.restock_days ?? body.restockDays;
+  if (daysRaw !== undefined && daysRaw !== null && daysRaw !== "") {
+    const days = parseInt(daysRaw, 10);
+    if (Number.isNaN(days) || days <= 0) return null;
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+  const dateRaw = body.restock_date ?? body.restockDate;
+  if (dateRaw === null) return null;
+  if (typeof dateRaw === "string" && dateRaw.length > 0) {
+    const parsed = new Date(dateRaw);
+    return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+  }
+  return undefined;
+}
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -55,6 +77,7 @@ export async function POST(request) {
       );
     }
 
+    const restockDate = resolveRestockDate(body);
     const product = await prisma.product.create({
       data: {
         name: body.name,
@@ -64,6 +87,7 @@ export async function POST(request) {
         imageUrl: body.image_url || "",
         categoryId: body.category_id ? parseInt(body.category_id) : null,
         stockQuantity: parseInt(body.stock_quantity) || 0,
+        restockDate: restockDate === undefined ? null : restockDate,
       },
       include: {
         category: true,
@@ -142,6 +166,11 @@ export async function PUT(request) {
     };
     if (typeof incomingImage === "string" && incomingImage.length > 0) {
       updateData.imageUrl = incomingImage;
+    }
+
+    const resolvedRestock = resolveRestockDate(body);
+    if (resolvedRestock !== undefined) {
+      updateData.restockDate = resolvedRestock;
     }
 
     const product = await prisma.product.update({

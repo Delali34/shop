@@ -175,6 +175,30 @@ export const ProductModal = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
+              Restock in (days)
+            </label>
+            <input
+              type="number"
+              name="restock_days"
+              value={currentProduct.restock_days ?? ""}
+              onChange={handleInputChange}
+              placeholder="Leave blank if in stock"
+              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              min="0"
+              disabled={isSubmitting}
+            />
+            {currentProduct.restock_date_display && (
+              <p className="text-xs text-gray-500 mt-1">
+                Currently scheduled: {currentProduct.restock_date_display}
+              </p>
+            )}
+            <p className="text-xs text-gray-400 mt-1">
+              Set to 0 or clear to remove the restock date.
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Description
             </label>
             <textarea

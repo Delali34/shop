@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import toast from "react-hot-toast";
 import useCartStore from "@/store/cartStore";
+import { getRestockInfo, formatRestockLabel } from "@/utils/restock";
 
 const SuccessNotification = ({ message }) => (
   <div className="flex items-center gap-2 bg-white shadow-lg rounded-lg p-4">
@@ -61,6 +62,19 @@ const RelatedProductCard = ({ product, onProductClick }) => (
             GH₵{parseFloat(product.price).toFixed(2)}
           </span>
         </div>
+        {(product.stockQuantity ?? 0) === 0 && (() => {
+          const info = getRestockInfo(product);
+          return (
+            <p className="text-xs text-red-500 mt-2">
+              Out of Stock
+              {info && (
+                <span className="block text-amber-600">
+                  {formatRestockLabel(info)}
+                </span>
+              )}
+            </p>
+          );
+        })()}
       </div>
     </motion.div>
   </Link>
@@ -132,20 +146,23 @@ export default function ProductPage({ params }) {
   }, [params.id]);
 
   const handleAddToCart = async () => {
-    if (product && !addingToCart) {
-      setAddingToCart(true);
+    if (!product || addingToCart) return;
+    if ((product.stockQuantity ?? 0) <= 0) {
+      toast.error("This product is currently out of stock");
+      return;
+    }
+    setAddingToCart(true);
 
-      try {
-        addItem(product, quantity);
-        toast.custom((t) => (
-          <SuccessNotification message={`${product.name} added to cart`} />
-        ));
-        setQuantity(1);
-      } catch (error) {
-        toast.error("Failed to add item to cart");
-      } finally {
-        setAddingToCart(false);
-      }
+    try {
+      addItem(product, quantity);
+      toast.custom((t) => (
+        <SuccessNotification message={`${product.name} added to cart`} />
+      ));
+      setQuantity(1);
+    } catch (error) {
+      toast.error("Failed to add item to cart");
+    } finally {
+      setAddingToCart(false);
     }
   };
 
@@ -282,6 +299,27 @@ export default function ProductPage({ params }) {
               <p className="text-gray-600">{product.description}</p>
             </motion.div>
 
+            {(product.stockQuantity ?? 0) === 0 && (() => {
+              const info = getRestockInfo(product);
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-md border border-amber-300 bg-amber-50 p-4"
+                >
+                  <p className="text-sm font-medium text-amber-800">
+                    Out of stock
+                  </p>
+                  {info && (
+                    <p className="text-sm text-amber-700 mt-1">
+                      {formatRestockLabel(info)} (around{" "}
+                      {info.date.toLocaleDateString()}).
+                    </p>
+                  )}
+                </motion.div>
+              );
+            })()}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -292,7 +330,7 @@ export default function ProductPage({ params }) {
               <div className="flex items-center border rounded-md">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  disabled={quantity <= 1}
+                  disabled={quantity <= 1 || (product.stockQuantity ?? 0) === 0}
                   className="px-3 py-2 text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50"
                 >
                   -
@@ -302,7 +340,8 @@ export default function ProductPage({ params }) {
                 </span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 transition-colors"
+                  disabled={(product.stockQuantity ?? 0) === 0}
+                  className="px-3 py-2 text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50"
                 >
                   +
                 </button>
@@ -314,11 +353,15 @@ export default function ProductPage({ params }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
               onClick={handleAddToCart}
-              disabled={addingToCart}
-              className="w-full md:w-auto px-8 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              disabled={addingToCart || (product.stockQuantity ?? 0) === 0}
+              className="w-full md:w-auto px-8 py-3 bg-gray-900 text-white hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <FaShoppingCart />
-              {addingToCart ? "Adding..." : "Add to Cart"}
+              {(product.stockQuantity ?? 0) === 0
+                ? "Out of Stock"
+                : addingToCart
+                ? "Adding..."
+                : "Add to Cart"}
             </motion.button>
 
             <motion.div

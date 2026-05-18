@@ -3,6 +3,24 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/adminGuard";
 
+function resolveRestockDate(body) {
+  const daysRaw = body.restock_days ?? body.restockDays;
+  if (daysRaw !== undefined && daysRaw !== null && daysRaw !== "") {
+    const days = parseInt(daysRaw, 10);
+    if (Number.isNaN(days) || days <= 0) return null;
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+  const dateRaw = body.restock_date ?? body.restockDate;
+  if (dateRaw === null) return null;
+  if (typeof dateRaw === "string" && dateRaw.length > 0) {
+    const parsed = new Date(dateRaw);
+    return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+  }
+  return undefined;
+}
+
 export async function GET(request, { params }) {
   try {
     const { id } = params;
@@ -95,6 +113,11 @@ export async function PUT(request, { params }) {
     };
     if (typeof incomingImage === "string" && incomingImage.length > 0) {
       updateData.imageUrl = incomingImage;
+    }
+
+    const resolvedRestock = resolveRestockDate(body);
+    if (resolvedRestock !== undefined) {
+      updateData.restockDate = resolvedRestock;
     }
 
     const product = await prisma.product.update({

@@ -105,6 +105,20 @@ export const ProductsTab = ({ products, onEdit, onDelete, onAddNew }) => {
                 <p className="text-sm text-gray-500">
                   Stock: {product.stockQuantity}
                 </p>
+                {product.stockQuantity === 0 && product.restockDate && (() => {
+                  const date = new Date(product.restockDate);
+                  if (Number.isNaN(date.getTime())) return null;
+                  const days = Math.ceil(
+                    (date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+                  );
+                  if (days <= 0) return null;
+                  return (
+                    <p className="text-xs text-amber-600">
+                      Restocks in {days} day{days === 1 ? "" : "s"} (
+                      {date.toLocaleDateString()})
+                    </p>
+                  );
+                })()}
                 {product.category && (
                   <span className="inline-block bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded">
                     {product.category.name}

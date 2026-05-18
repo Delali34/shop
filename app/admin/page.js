@@ -234,6 +234,12 @@ export default function AdminDashboard() {
         price: parseFloat(currentProduct.price) || 0,
         stock_quantity: parseInt(currentProduct.stock_quantity) || 0,
         image_url,
+        // Send "" so the API clears restockDate when admin emptied the field.
+        restock_days:
+          currentProduct.restock_days === undefined ||
+          currentProduct.restock_days === null
+            ? ""
+            : String(currentProduct.restock_days),
       };
 
       const method = currentProduct.id ? "PUT" : "POST";
@@ -272,6 +278,7 @@ export default function AdminDashboard() {
         description: "",
         category_id: "",
         stock_quantity: "",
+        restock_days: "",
       });
       setImage(null);
 
@@ -416,18 +423,32 @@ export default function AdminDashboard() {
 
   // Normalizers: the DB returns camelCase (imageUrl, categoryId, stockQuantity)
   // but the admin forms expect snake_case. Bridge the two when loading for edit.
-  const productToForm = (product) => ({
-    ...product,
-    image_url: product.image_url ?? product.imageUrl ?? "",
-    category_id:
-      product.category_id ?? product.categoryId ?? "",
-    stock_quantity:
-      product.stock_quantity ?? product.stockQuantity ?? 0,
-    price:
-      product.price !== undefined && product.price !== null
-        ? String(product.price)
-        : "",
-  });
+  const productToForm = (product) => {
+    const restockRaw = product.restockDate ?? product.restock_date ?? null;
+    let restockDays = "";
+    let restockDisplay = "";
+    if (restockRaw) {
+      const date = new Date(restockRaw);
+      if (!Number.isNaN(date.getTime())) {
+        restockDisplay = date.toLocaleDateString();
+        const diffMs = date.getTime() - Date.now();
+        const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        if (days > 0) restockDays = String(days);
+      }
+    }
+    return {
+      ...product,
+      image_url: product.image_url ?? product.imageUrl ?? "",
+      category_id: product.category_id ?? product.categoryId ?? "",
+      stock_quantity: product.stock_quantity ?? product.stockQuantity ?? 0,
+      price:
+        product.price !== undefined && product.price !== null
+          ? String(product.price)
+          : "",
+      restock_days: restockDays,
+      restock_date_display: restockDisplay,
+    };
+  };
 
   const categoryToForm = (category) => ({
     ...category,
@@ -473,6 +494,7 @@ export default function AdminDashboard() {
                 category_id: "",
                 stock_quantity: "",
                 image_url: "",
+                restock_days: "",
               });
               setImage(null);
               setIsProductModalOpen(true);
