@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 
 export const ProductModal = ({
@@ -12,9 +12,18 @@ export const ProductModal = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [imagePreview, setImagePreview] = useState(
-    currentProduct?.imageUrl || null
-  );
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // Sync the preview with whichever product is loaded into the modal.
+  // useState initializer only runs once, so the original implementation
+  // showed a stale image across edits.
+  useEffect(() => {
+    if (!isOpen) return;
+    const existing =
+      currentProduct?.image_url || currentProduct?.imageUrl || null;
+    setImagePreview(existing);
+    setError("");
+  }, [isOpen, currentProduct?.id, currentProduct?.image_url, currentProduct?.imageUrl]);
 
   if (!isOpen) return null;
 

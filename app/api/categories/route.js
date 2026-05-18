@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { requireAdmin } from "@/lib/adminGuard";
 
 export async function GET() {
   try {
@@ -34,7 +35,12 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { name, description, slug, image_url } = await request.json();
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
+    const body = await request.json();
+    const { name, description, slug } = body;
+    const image_url = body.image_url ?? body.imageUrl;
 
     if (!name || !slug) {
       return NextResponse.json(

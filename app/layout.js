@@ -4,8 +4,7 @@ import { Suspense } from "react";
 import AuthProvider from "@/components/providers/AuthProvider";
 import CartProvider from "@/components/providers/CartProvider";
 import ToastProvider from "@/components/providers/ToastProvider";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import LayoutChrome from "@/components/LayoutChrome";
 import Script from "next/script";
 
 export const metadata = {
@@ -95,9 +94,7 @@ export default function RootLayout({ children }) {
         <Suspense fallback={null}>
           <AuthProvider>
             <CartProvider>
-              <Navbar />
-              {children}
-              <Footer />
+              <LayoutChrome>{children}</LayoutChrome>
               <ToastProvider />
             </CartProvider>
           </AuthProvider>

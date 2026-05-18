@@ -414,6 +414,26 @@ export default function AdminDashboard() {
     }
   };
 
+  // Normalizers: the DB returns camelCase (imageUrl, categoryId, stockQuantity)
+  // but the admin forms expect snake_case. Bridge the two when loading for edit.
+  const productToForm = (product) => ({
+    ...product,
+    image_url: product.image_url ?? product.imageUrl ?? "",
+    category_id:
+      product.category_id ?? product.categoryId ?? "",
+    stock_quantity:
+      product.stock_quantity ?? product.stockQuantity ?? 0,
+    price:
+      product.price !== undefined && product.price !== null
+        ? String(product.price)
+        : "",
+  });
+
+  const categoryToForm = (category) => ({
+    ...category,
+    image_url: category.image_url ?? category.imageUrl ?? "",
+  });
+
   // Navigation items
   const navItems = [
     { id: "products", icon: FaBox, label: "Products" },
@@ -439,7 +459,8 @@ export default function AdminDashboard() {
           <ProductsTab
             products={products}
             onEdit={(product) => {
-              setCurrentProduct(product);
+              setCurrentProduct(productToForm(product));
+              setImage(null);
               setIsProductModalOpen(true);
             }}
             onDelete={handleDeleteProduct}
@@ -449,10 +470,11 @@ export default function AdminDashboard() {
                 brand: "",
                 price: "",
                 description: "",
-                rating: "",
                 category_id: "",
                 stock_quantity: "",
+                image_url: "",
               });
+              setImage(null);
               setIsProductModalOpen(true);
             }}
           />
@@ -463,12 +485,17 @@ export default function AdminDashboard() {
             categories={categories}
             products={products}
             onEdit={(category) => {
-              setCurrentCategory(category);
+              setCurrentCategory(categoryToForm(category));
               setIsCategoryModalOpen(true);
             }}
             onDelete={handleDeleteCategory}
             onAddNew={() => {
-              setCurrentCategory({ name: "", description: "", slug: "" });
+              setCurrentCategory({
+                name: "",
+                description: "",
+                slug: "",
+                image_url: "",
+              });
               setIsCategoryModalOpen(true);
             }}
           />

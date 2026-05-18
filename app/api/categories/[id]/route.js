@@ -1,11 +1,17 @@
 // app/api/categories/[id]/route.js
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { requireAdmin } from "@/lib/adminGuard";
 
 export async function PUT(request, { params }) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const { id } = params;
-    const { name, description, slug, image_url } = await request.json();
+    const body = await request.json();
+    const { name, description, slug } = body;
+    const incomingImage = body.image_url ?? body.imageUrl;
 
     // Validate required fields
     if (!name || !slug) {
@@ -44,15 +50,16 @@ export async function PUT(request, { params }) {
       );
     }
 
-    // Update the category
+    // Only overwrite image when explicitly provided so editing
+    // without re-uploading doesn't wipe the existing image.
+    const updateData = { name, description, slug };
+    if (typeof incomingImage === "string" && incomingImage.length > 0) {
+      updateData.imageUrl = incomingImage;
+    }
+
     const updatedCategory = await prisma.category.update({
       where: { id: parseInt(id) },
-      data: {
-        name,
-        description,
-        slug,
-        imageUrl: image_url || null,
-      },
+      data: updateData,
     });
 
     return NextResponse.json({
@@ -76,6 +83,9 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
+  const guard = await requireAdmin();
+  if (guard instanceof NextResponse) return guard;
+
   const { id } = params;
 
   try {

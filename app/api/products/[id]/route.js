@@ -1,6 +1,7 @@
 // app/api/products/[id]/route.js
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { requireAdmin } from "@/lib/adminGuard";
 
 export async function GET(request, { params }) {
   try {
@@ -31,6 +32,9 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const { id } = params;
 
     // First, delete all related order items
@@ -70,20 +74,32 @@ export async function DELETE(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const { id } = params;
     const body = await request.json();
 
+    const incomingImage = body.image_url ?? body.imageUrl;
+    const updateData = {
+      name: body.name,
+      brand: body.brand || "",
+      price: parseFloat(body.price),
+      description: body.description || "",
+      categoryId:
+        (body.category_id ?? body.categoryId)
+          ? parseInt(body.category_id ?? body.categoryId)
+          : null,
+      stockQuantity:
+        parseInt(body.stock_quantity ?? body.stockQuantity) || 0,
+    };
+    if (typeof incomingImage === "string" && incomingImage.length > 0) {
+      updateData.imageUrl = incomingImage;
+    }
+
     const product = await prisma.product.update({
       where: { id: parseInt(id) },
-      data: {
-        name: body.name,
-        brand: body.brand || "",
-        price: parseFloat(body.price),
-        description: body.description || "",
-        imageUrl: body.image_url || "",
-        categoryId: body.category_id ? parseInt(body.category_id) : null,
-        stockQuantity: parseInt(body.stock_quantity) || 0,
-      },
+      data: updateData,
       include: {
         category: true,
       },

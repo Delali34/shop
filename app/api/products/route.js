@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { requireAdmin } from "@/lib/adminGuard";
 
 export async function GET(request) {
   try {
@@ -33,6 +34,9 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const body = await request.json();
 
     if (!body.name || !body.price) {
@@ -88,6 +92,9 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const body = await request.json();
 
     if (!body.id) {
@@ -118,17 +125,28 @@ export async function PUT(request) {
       );
     }
 
+    // Only overwrite the image when a new URL is explicitly provided.
+    // Empty string / undefined => keep existing image.
+    const incomingImage = body.image_url ?? body.imageUrl;
+    const updateData = {
+      name: body.name,
+      brand: body.brand || "",
+      price: price,
+      description: body.description || "",
+      categoryId:
+        (body.category_id ?? body.categoryId)
+          ? parseInt(body.category_id ?? body.categoryId)
+          : null,
+      stockQuantity:
+        parseInt(body.stock_quantity ?? body.stockQuantity) || 0,
+    };
+    if (typeof incomingImage === "string" && incomingImage.length > 0) {
+      updateData.imageUrl = incomingImage;
+    }
+
     const product = await prisma.product.update({
       where: { id: parseInt(body.id) },
-      data: {
-        name: body.name,
-        brand: body.brand || "",
-        price: price,
-        description: body.description || "",
-        imageUrl: body.image_url || "",
-        categoryId: body.category_id ? parseInt(body.category_id) : null,
-        stockQuantity: parseInt(body.stock_quantity) || 0,
-      },
+      data: updateData,
       include: {
         category: true,
       },
@@ -152,6 +170,9 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
+  const guard = await requireAdmin();
+  if (guard instanceof NextResponse) return guard;
+
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 

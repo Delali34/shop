@@ -1,6 +1,7 @@
 // app/api/upload/route.js
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/adminGuard";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,6 +11,9 @@ cloudinary.config({
 
 export async function POST(request) {
   try {
+    const guard = await requireAdmin();
+    if (guard instanceof NextResponse) return guard;
+
     const { data } = await request.json();
 
     if (!data) {

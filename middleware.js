@@ -6,31 +6,33 @@ export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
     const isAuth = !!token;
-    const isAuthPage =
-      req.nextUrl.pathname.startsWith("/login") ||
-      req.nextUrl.pathname.startsWith("/signup");
+    const { pathname } = req.nextUrl;
 
-    // Store the original destination for after login
+    const isAuthPage =
+      pathname.startsWith("/login") || pathname.startsWith("/signup");
+    const isAdminPage = pathname.startsWith("/admin");
+
     const callbackUrl = req.nextUrl.searchParams.get("callbackUrl");
 
     if (isAuthPage) {
       if (isAuth) {
-        // If user is already logged in on auth pages
         return NextResponse.redirect(new URL(callbackUrl || "/", req.url));
       }
-      // Let them access login/signup pages
       return NextResponse.next();
     }
 
     if (!isAuth) {
-      // If user is not logged in, redirect to login with callback
-      const from = req.nextUrl.pathname + req.nextUrl.search;
+      const from = pathname + req.nextUrl.search;
       return NextResponse.redirect(
         new URL(`/login?callbackUrl=${encodeURIComponent(from)}`, req.url)
       );
     }
 
-    // Allow authenticated users to access protected pages
+    // Admin pages require admin role
+    if (isAdminPage && token?.role !== "admin") {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
     return NextResponse.next();
   },
   {
@@ -45,6 +47,7 @@ export const config = {
     "/profile/:path*",
     "/orders/:path*",
     "/checkout/:path*",
+    "/admin/:path*",
     "/login",
     "/signup",
   ],
