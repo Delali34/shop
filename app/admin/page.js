@@ -15,7 +15,6 @@ import { UsersTab } from "@/components/admin/UsersTab";
 import { ProductModal } from "@/components/admin/Modals/ProductModal";
 import { CategoryModal } from "@/components/admin/Modals/CategoryModal";
 import { UserModal } from "@/components/admin/Modals/UserModal";
-import { StatsPanel } from "@/components/admin/StatsPanel";
 import { OrdersTab } from "@/components/admin/OrdersTab";
 import { PaymentsTab } from "@/components/admin/PaymentsTab";
 
@@ -618,17 +617,6 @@ export default function AdminDashboard() {
             />
           </>
         )}
-
-        {/* Stats Panel */}
-        <StatsPanel
-          stats={{
-            productsCount: products?.length || 0,
-            categoriesCount: categories?.length || 0,
-            usersCount: users?.length || 0,
-            ordersCount: orders?.length || 0,
-            isLoading,
-          }}
-        />
       </div>
     </div>
   );
